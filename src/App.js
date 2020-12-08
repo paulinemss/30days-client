@@ -11,6 +11,10 @@ import ProtectedRoute from "./routing-components/ProtectedRoute";
 import { getLoggedIn, logout } from "./services/auth";
 import * as PATHS from "./utils/paths";
 
+import Courses from './pages/Courses';
+import SingleCourse from './pages/SingleCourse';
+import './App.css';
+
 class App extends React.Component {
   state = {
     user: null,
@@ -36,7 +40,7 @@ class App extends React.Component {
         user: res.data.user,
         isLoading: false,
       });
-    });
+    })
   };
 
   handleLogout = () => {
@@ -80,30 +84,39 @@ class App extends React.Component {
     }
 
     return (
-      <div className="App">
+      <>
         <Navbar handleLogout={this.handleLogout} user={this.state.user} />
-        <Switch>
-          <NormalRoute exact path={PATHS.HOMEPAGE} component={HomePage} />
-          <NormalRoute
-            exact
-            path={PATHS.SIGNUPPAGE}
-            authenticate={this.authenticate}
-            component={Signup}
-          />
-          <NormalRoute
-            exact
-            path={PATHS.LOGINPAGE}
-            authenticate={this.authenticate}
-            component={LogIn}
-          />
-          <ProtectedRoute
-            exact
-            path={PATHS.PROTECTEDPAGE}
-            component={ProtectedPage}
-            user={this.state.user}
-          />
-        </Switch>
-      </div>
+        <div className="App">
+          <Switch>
+
+            <NormalRoute exact path={PATHS.HOMEPAGE} component={HomePage} />
+            <NormalRoute exact path='/courses' component={Courses} />
+            <NormalRoute exact path='/courses/:id' component={SingleCourse} />
+
+            <NormalRoute
+              exact
+              path={PATHS.SIGNUPPAGE}
+              authenticate={this.authenticate}
+              component={Signup}
+            />
+
+            <NormalRoute
+              exact
+              path={PATHS.LOGINPAGE}
+              authenticate={this.authenticate}
+              component={LogIn}
+            />
+
+            <ProtectedRoute
+              exact
+              path={PATHS.PROTECTEDPAGE}
+              component={ProtectedPage}
+              user={this.state.user}
+            />
+            
+          </Switch>
+        </div>
+      </>
     );
   }
 }
