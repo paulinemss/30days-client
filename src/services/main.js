@@ -45,3 +45,10 @@ export function createNewCourse(course) {
     .then(successStatus)
     .catch(internalServerError)
 }
+
+export function editCourse(course, id) {
+  return mainService
+    .put(`/courses/edit/${id}`, course)
+    .then(successStatus)
+    .catch(internalServerError)
+}

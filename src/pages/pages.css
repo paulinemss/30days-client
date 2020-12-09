@@ -1,0 +1,21 @@
+.course_main {
+  display: flex;
+  justify-content: space-between;
+}
+
+.course_side {
+  width: 50%;
+  display: flex;
+}
+
+.course_side.left {
+  flex-direction: column;
+}
+
+.course_side.right {
+  flex-wrap: wrap;
+}
+
+.course_day {
+  padding: 20px;
+}

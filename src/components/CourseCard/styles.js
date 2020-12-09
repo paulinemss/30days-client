@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
   padding: 20px;
   border-radius: 5px;
   background: lavender;
+  margin-bottom: 20px;
 `
 
 export const WrapperLeft = styled.div`

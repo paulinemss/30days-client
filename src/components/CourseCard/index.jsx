@@ -27,6 +27,7 @@ const CourseCard = (props) => {
       </Styles.WrapperLeft>
       <div>
         <button>See more</button>
+        <Link to={`/courses/edit/${course.shortId}`}>Edit Course</Link>
       </div>
     </Styles.Wrapper>
   )
