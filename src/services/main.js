@@ -38,3 +38,10 @@ export function getOneCourse(id) {
     .then(successStatus)
     .catch(internalServerError)
 }
+
+export function createNewCourse(course) {
+  return mainService
+    .post('/courses/create', course)
+    .then(successStatus)
+    .catch(internalServerError)
+}

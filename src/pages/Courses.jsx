@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { getCourses } from '../services/main';
 import CourseCard from '../components/CourseCard';
 
@@ -22,6 +23,9 @@ export default class Courses extends Component {
     return (
       <div>
         <h1>COURSES</h1>
+        <button>
+          <Link to='/courses/create'>Create new course</Link>
+        </button>
         {this.state.courses.map(course => (
           <CourseCard course={course} key={course.shortId} />
         ))}

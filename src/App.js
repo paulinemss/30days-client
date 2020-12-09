@@ -13,6 +13,7 @@ import * as PATHS from "./utils/paths";
 
 import Courses from './pages/Courses';
 import SingleCourse from './pages/SingleCourse';
+import CreateCourse from "./pages/CreateCourse";
 import './App.css';
 
 class App extends React.Component {
@@ -91,6 +92,7 @@ class App extends React.Component {
 
             <NormalRoute exact path={PATHS.HOMEPAGE} component={HomePage} />
             <NormalRoute exact path='/courses' component={Courses} />
+            <NormalRoute exact path='/courses/create' component={CreateCourse} />
             <NormalRoute exact path='/courses/:id' component={SingleCourse} />
 
             <NormalRoute
