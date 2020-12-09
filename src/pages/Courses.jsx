@@ -18,8 +18,7 @@ export default class Courses extends Component {
   }
 
   render() {
-    console.log(this.state.courses); 
-
+    console.log(this.state.courses);
     return (
       <div>
         <h1>COURSES</h1>
@@ -27,7 +26,11 @@ export default class Courses extends Component {
           <Link to='/courses/create'>Create new course</Link>
         </button>
         {this.state.courses.map(course => (
-          <CourseCard course={course} key={course.shortId} />
+          <CourseCard 
+            course={course} 
+            key={course.shortId}
+            canEdit={this.props.user && this.props.user._id === course.author}
+          />
         ))}
       </div>
     )

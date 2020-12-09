@@ -133,7 +133,7 @@ export default class CreateCourse extends Component {
     formBody.append('title', this.state.title);
     formBody.append('smallDescription', this.state.smallDescription);
     formBody.append('longDescription', this.state.longDescription);
-    formBody.append('author', this.state.author);
+    formBody.append('author', this.props.user._id);
     formBody.append('category', this.state.category);
     formBody.append('days', JSON.stringify(this.state.days));
 

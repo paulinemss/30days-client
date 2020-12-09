@@ -6,7 +6,10 @@ export default class CreateCourse extends Component {
     return (
       <div>
         <h1>CREATE COURSE</h1>
-        <CourseForm mode='create' />
+        <CourseForm 
+          mode='create'
+          user={this.props.user}
+        />
       </div>
     )
   }

@@ -91,10 +91,28 @@ class App extends React.Component {
         <div className="App">
           <Switch>
 
-            <NormalRoute exact path={PATHS.HOMEPAGE} component={HomePage} />
-            <NormalRoute exact path='/courses' component={Courses} />
-            <NormalRoute exact path='/courses/create' component={CreateCourse} />
+            <NormalRoute 
+              exact 
+              path={PATHS.HOMEPAGE} 
+              component={HomePage} 
+            />
+
+            <NormalRoute 
+              exact 
+              path='/courses' 
+              component={Courses} 
+              user={this.state.user} 
+            />
+
+            <NormalRoute 
+              exact 
+              path='/courses/create' 
+              user={this.state.user}
+              component={CreateCourse}
+            />
+
             <NormalRoute exact path='/courses/edit/:id' component={EditCourse} />
+
             <NormalRoute exact path='/courses/:id' component={SingleCourse} />
 
             <NormalRoute
