@@ -20,7 +20,11 @@ export default class EditCourse extends Component {
       <div>
         <h1>EDIT COURSE</h1>
         {this.state.course && 
-          <CourseForm course={this.state.course} mode='edit' />
+          <CourseForm 
+            course={this.state.course} 
+            mode='edit' 
+            user={this.props.user}
+          />
         }
       </div>
     )

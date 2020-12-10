@@ -10,6 +10,7 @@ export default class Challenges extends Component {
         {this.props.challenges.map(challenge => (
           <CourseCard 
             mode='challenge'
+            challenge={challenge}
             course={challenge.course} 
             key={challenge.shortId}
           />

@@ -4,7 +4,7 @@ import { FaHeart } from 'react-icons/fa';
 import * as Styles from './styles';
 
 const CourseCard = (props) => {
-  const { course, mode } = props;
+  const { challenge, course, mode } = props;
 
   return (
     <Styles.Wrapper>
@@ -20,7 +20,7 @@ const CourseCard = (props) => {
             ? <Link to={`/courses/${course.shortId}`}>
                 <h2>{course.title}</h2>
               </Link>
-            : <Link to={`/challenges/${course.shortId}`}>
+            : <Link to={`/challenges/page/${challenge.shortId}`}>
                 <h2>{course.title}</h2>
               </Link>
           }

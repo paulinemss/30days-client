@@ -60,6 +60,24 @@ export function getChallenges(id) {
     .catch(internalServerError)
 }
 
+export function getOneChallenge(challengeId) {
+  return mainService
+    .get(`/challenges/page/${challengeId}`, {
+      headers: {
+        Authorization: localStorage.getItem("accessToken"),
+      },
+    })
+    .then(successStatus)
+    .catch(internalServerError)
+}
+
+export function updateChallenge(challenge, id) {
+  return mainService
+    .put(`/challenges/update/${id}`, challenge)
+    .then(successStatus)
+    .catch(internalServerError)
+}
+
 export function startChallenge(course, id) {
   return mainService
     .post(`/challenges/start/${id}`, course)

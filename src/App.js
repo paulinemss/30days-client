@@ -12,11 +12,12 @@ import { getLoggedIn, logout } from "./services/auth";
 import * as PATHS from "./utils/paths";
 
 import Courses from './pages/Courses';
-import SingleCourse from './pages/SingleCourse';
+import SingleCourse from './pages/SinglePages/SingleCourse';
 import CreateCourse from "./pages/CreateCourse";
 import EditCourse from './pages/EditCourse';
 import Challenges from './pages/Challenges';
-import SingleChallenge from './pages/SingleChallenge';
+import SingleChallenge from './pages/SinglePages/SingleChallenge';
+import NotFound from './pages/NotFound';
 import { getChallenges } from './services/main';
 import './App.css';
 
@@ -109,7 +110,7 @@ class App extends React.Component {
 
     return (
       <>
-        {/* <Navbar handleLogout={this.handleLogout} user={this.state.user} /> */}
+        <Navbar handleLogout={this.handleLogout} user={this.state.user} />
 
         <div className="App">
           <Switch>
@@ -137,6 +138,7 @@ class App extends React.Component {
             <NormalRoute 
               exact 
               path='/courses/edit/:id' 
+              user={this.state.user}
               component={EditCourse} 
             />
 
@@ -159,7 +161,7 @@ class App extends React.Component {
 
             <NormalRoute 
               exact 
-              path='/challenges/:id' 
+              path='/challenges/page/:id' 
               component={SingleChallenge} 
               user={this.state.user}
               challenges={this.state.challenges}
@@ -184,6 +186,16 @@ class App extends React.Component {
               path={PATHS.PROTECTEDPAGE}
               component={ProtectedPage}
               user={this.state.user}
+            />
+
+            <NormalRoute
+              exact
+              path='/404'
+              component={NotFound}
+            />
+
+            <NormalRoute
+              component={NotFound}
             />
             
           </Switch>

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { FaHeart } from 'react-icons/fa';
 import { Button } from '@material-ui/core';
-import { getOneCourse, startChallenge } from '../services/main';
-import Logo from '../components/Logo';
-import './pages.css';
+import { getOneCourse, startChallenge } from '../../services/main';
+import Logo from '../../components/Logo';
 
 export default class SingleCourse extends Component {
   state = {
@@ -29,14 +28,14 @@ export default class SingleCourse extends Component {
             this.props.history.push(`/challenges/${challenge.shortId}`);
           } else {
             this.props.addChallenge(challenge);
-            this.props.history.push(`/challenges/${challenge.shortId}`);
+            this.props.history.push(`/challenges/page/${challenge.shortId}`);
           }        
         })
         .catch(err => {
           console.log('err', err);
         })
     } else {
-      this.props.history.push("/login");
+      this.props.history.push("/auth/login");
     }
   }
 

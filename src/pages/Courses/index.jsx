@@ -1,10 +1,10 @@
-/* Main import */ 
+/* Main imports */ 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getCourses } from '../../services/main';
 import CourseCard from '../../components/CourseCard';
 
-/* Styles import */ 
+/* Styles imports */ 
 import './style.css';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Button, IconButton } from '@material-ui/core';
