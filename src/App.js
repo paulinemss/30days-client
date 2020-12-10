@@ -16,6 +16,7 @@ import SingleCourse from './pages/SingleCourse';
 import CreateCourse from "./pages/CreateCourse";
 import EditCourse from './pages/EditCourse';
 import Challenges from './pages/Challenges';
+import SingleChallenge from './pages/SingleChallenge';
 import { getChallenges } from './services/main';
 import './App.css';
 
@@ -108,7 +109,8 @@ class App extends React.Component {
 
     return (
       <>
-        <Navbar handleLogout={this.handleLogout} user={this.state.user} />
+        {/* <Navbar handleLogout={this.handleLogout} user={this.state.user} /> */}
+
         <div className="App">
           <Switch>
 
@@ -143,6 +145,7 @@ class App extends React.Component {
               path='/courses/:id' 
               component={SingleCourse} 
               user={this.state.user}
+              challenges={this.state.challenges}
               addChallenge={this.addChallenge}
             />
 
@@ -152,6 +155,14 @@ class App extends React.Component {
               user={this.state.user}
               challenges={this.state.challenges}
               component={Challenges}
+            />
+
+            <NormalRoute 
+              exact 
+              path='/challenges/:id' 
+              component={SingleChallenge} 
+              user={this.state.user}
+              challenges={this.state.challenges}
             />
 
             <NormalRoute
