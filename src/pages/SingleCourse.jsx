@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FaHeart } from 'react-icons/fa';
-import { getOneCourse } from '../services/main';
+import { Button } from '@material-ui/core';
+import { getOneCourse, startChallenge } from '../services/main';
 import Logo from '../components/Logo';
 import './pages.css';
 
@@ -16,6 +17,21 @@ export default class SingleCourse extends Component {
         course: res.data
       })
     })
+  }
+
+  beginChallenge = () => {
+    if (this.props.user) {
+      startChallenge(this.state.course, this.props.user._id)
+        .then(res => {
+          console.log('res', res.data); 
+          this.props.addChallenge(res.data);
+        })
+        .catch(err => {
+          console.log('err', err);
+        })
+    } else {
+      this.props.history.push("/login");
+    }
   }
 
   showDayDetails = (num) => {
@@ -36,6 +52,14 @@ export default class SingleCourse extends Component {
           <p>{longDescription}</p>
           <p>{this.state.currentDetail}</p>
           <div><FaHeart /> {likes} Likes</div>
+
+          <Button 
+            variant='outlined' 
+            color='primary' 
+            onClick={this.beginChallenge}
+          >
+            Start 30 day challenge
+          </Button>
         </div>
         
         <div className='course_side right'>

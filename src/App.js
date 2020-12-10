@@ -15,12 +15,15 @@ import Courses from './pages/Courses';
 import SingleCourse from './pages/SingleCourse';
 import CreateCourse from "./pages/CreateCourse";
 import EditCourse from './pages/EditCourse';
+import Challenges from './pages/Challenges';
+import { getChallenges } from './services/main';
 import './App.css';
 
 class App extends React.Component {
   state = {
     user: null,
     isLoading: true,
+    challenges: []
   };
 
   componentDidMount = () => {
@@ -30,20 +33,38 @@ class App extends React.Component {
         isLoading: false,
       });
     }
-    getLoggedIn(accessToken).then((res) => {
-      if (!res.status) {
-        console.log("RES IN CASE OF FAILURE", res);
-        // deal with failed backend call
-        return this.setState({
+    getLoggedIn(accessToken)
+      .then((res) => {
+        if (!res.status) {
+          console.log("RES IN CASE OF FAILURE", res);
+          // deal with failed backend call
+          return this.setState({
+            isLoading: false,
+          });
+        }
+        this.setState({
+          user: res.data.user,
           isLoading: false,
         });
-      }
-      this.setState({
-        user: res.data.user,
-        isLoading: false,
-      });
-    })
+      })
+      .then(() => {
+        getChallenges(this.state.user._id).then(res => {
+          console.log('challenges data', res.data)
+          this.setState({
+            challenges: res.data
+          })
+        })
+      })
   };
+
+  addChallenge = (challenge) => {
+    const newChallenges = this.state.challenges.slice();
+    newChallenges.push(challenge);
+
+    this.setState({
+      challenges: newChallenges
+    })
+  }
 
   handleLogout = () => {
     const accessToken = localStorage.getItem("accessToken");
@@ -111,9 +132,27 @@ class App extends React.Component {
               component={CreateCourse}
             />
 
-            <NormalRoute exact path='/courses/edit/:id' component={EditCourse} />
+            <NormalRoute 
+              exact 
+              path='/courses/edit/:id' 
+              component={EditCourse} 
+            />
 
-            <NormalRoute exact path='/courses/:id' component={SingleCourse} />
+            <NormalRoute 
+              exact 
+              path='/courses/:id' 
+              component={SingleCourse} 
+              user={this.state.user}
+              addChallenge={this.addChallenge}
+            />
+
+            <NormalRoute
+              exact
+              path='/challenges'
+              user={this.state.user}
+              challenges={this.state.challenges}
+              component={Challenges}
+            />
 
             <NormalRoute
               exact

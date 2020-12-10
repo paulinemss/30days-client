@@ -6,6 +6,8 @@ function HomePage() {
     <div>
       <h1>HOMEPAGE</h1>
       <Link to='/courses'>Browse all courses</Link>
+      <br />
+      <Link to='/challenges'>Find your current challenges</Link>
     </div>
   );
 }

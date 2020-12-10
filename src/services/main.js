@@ -52,3 +52,17 @@ export function editCourse(course, id) {
     .then(successStatus)
     .catch(internalServerError)
 }
+
+export function getChallenges(id) {
+  return mainService
+    .get(`/challenges/${id}`)
+    .then(successStatus)
+    .catch(internalServerError)
+}
+
+export function startChallenge(course, id) {
+  return mainService
+    .post(`/challenges/start/${id}`, course)
+    .then(successStatus)
+    .catch(internalServerError)
+}
