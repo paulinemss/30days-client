@@ -13,3 +13,11 @@
   text-decoration: none;
   color: #161616;
 }
+
+.sort-button {
+  margin-right: 20px !important;
+}
+
+.active {
+  text-decoration: underline !important;
+}

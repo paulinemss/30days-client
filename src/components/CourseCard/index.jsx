@@ -35,8 +35,8 @@ const CourseCard = (props) => {
 
   } else if (course.category === 'arts') {
 
-    hexColor = '#8970ff';
-    rgbColor = 'rgba(137, 112, 255, 0.1)';
+    hexColor = '#995AE8';
+    rgbColor = 'rgba(153, 90, 232, 0.1)';
     icon = <ColorLensRoundedIcon style={{ color: hexColor }} />; 
 
   } else if (course.category === 'other') {
@@ -62,7 +62,12 @@ const CourseCard = (props) => {
         </div>
 
         <div className='card_details'>
-          <h2>30 days of... {course.title}</h2>
+          <Link to={mode === 'course' 
+            ? `/courses/${course.shortId}`
+            : `/challenges/page/${challenge.shortId}`
+          }>
+            <h2>30 days of... {course.title}</h2>
+          </Link>
           <p className='card_description'>{course.smallDescription}</p>
           
           {mode === 'course'

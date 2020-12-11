@@ -8,6 +8,7 @@ import PageTitle from '../../components/PageTitle';
 /* Styles imports */ 
 import './style.css';
 import { Button } from '@material-ui/core';
+import FiberManualRecordRoundedIcon from '@material-ui/icons/FiberManualRecordRounded';
 
 /* Component */ 
 export default class Courses extends Component {
@@ -70,42 +71,75 @@ export default class Courses extends Component {
         <div className='courses_btns'>
           <div className='courses_btns-left'>
             <Button 
-              color={this.state.selected === 'all' ? 'primary' : 'default'}
+              className={this.state.selected === 'all' 
+                ? 'sort-button active'
+                : 'sort-button'
+              }
               onClick={() => this.sortCourses('all')}
             >
               All
             </Button>
 
             <Button
-              color={this.state.selected === 'mindfulness' ? 'primary' : 'default'}
+              startIcon={<FiberManualRecordRoundedIcon 
+                style={{ color: '#2ae2be', fontSize: '12px' }}
+              />}
+              className={this.state.selected === 'mindfulness' 
+                ? 'sort-button active'
+                : 'sort-button'
+              }
               onClick={() => this.sortCourses('mindfulness')}
             >
               Mindfulness
             </Button>
 
             <Button
-              color={this.state.selected === 'exercise' ? 'primary' : 'default'}
+              startIcon={<FiberManualRecordRoundedIcon 
+                style={{ color: '#feb721', fontSize: '12px' }}
+              />}
+              className={this.state.selected === 'exercise' 
+                ? 'sort-button active'
+                : 'sort-button'
+              }
               onClick={() => this.sortCourses('exercise')}
             >
               Exercise
             </Button>
 
             <Button
-              color={this.state.selected === 'tech' ? 'primary' : 'default'}
+              startIcon={<FiberManualRecordRoundedIcon 
+                style={{ color: '#6289ff', fontSize: '12px' }}
+              />}
+              className={this.state.selected === 'tech' 
+                ? 'sort-button active'
+                : 'sort-button'
+              }
               onClick={() => this.sortCourses('tech')}
             >
               Tech
             </Button>
 
             <Button
-              color={this.state.selected === 'arts' ? 'primary' : 'default'}
+              startIcon={<FiberManualRecordRoundedIcon 
+                style={{ color: '#995AE8', fontSize: '12px' }}
+              />}
+              className={this.state.selected === 'arts' 
+                ? 'sort-button active'
+                : 'sort-button'
+              }
               onClick={() => this.sortCourses('arts')}
             >
               Arts & Crafts
             </Button>
 
             <Button
-              color={this.state.selected === 'other' ? 'primary' : 'default'}
+              startIcon={<FiberManualRecordRoundedIcon 
+                style={{ color: '#ff7f7e', fontSize: '12px' }}
+              />}
+              className={this.state.selected === 'other' 
+                ? 'sort-button active'
+                : 'sort-button'
+              }
               onClick={() => this.sortCourses('other')}
             >
               Other
