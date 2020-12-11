@@ -53,6 +53,24 @@ export function editCourse(course, id) {
     .catch(internalServerError)
 }
 
+export function hideCourse(id, course) {
+  return mainService
+    .put(`/courses/delete/${id}`, course)
+    .then(successStatus)
+    .catch(internalServerError)
+}
+
+export function likeCourse(courseId, likes) {
+  return mainService
+    .put(`/courses/like/${courseId}`, { likes }, {
+      headers: {
+        Authorization: localStorage.getItem("accessToken"),
+      },
+    })
+    .then(successStatus)
+    .catch(internalServerError)
+}
+
 export function getChallenges(id) {
   return mainService
     .get(`/challenges/${id}`)
@@ -74,6 +92,20 @@ export function getOneChallenge(challengeId) {
 export function updateChallenge(challenge, id) {
   return mainService
     .put(`/challenges/update/${id}`, challenge)
+    .then(successStatus)
+    .catch(internalServerError)
+}
+
+export function restartChallenge(challenge, id) {
+  return mainService
+    .put(`/challenges/restart/${id}`, challenge)
+    .then(successStatus)
+    .catch(internalServerError)
+}
+
+export function deleteChallenge(challengeId) {
+  return mainService
+    .delete(`/challenges/delete/${challengeId}`)
     .then(successStatus)
     .catch(internalServerError)
 }

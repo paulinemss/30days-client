@@ -1,10 +1,16 @@
 /* Main imports */ 
 import React, { Component } from 'react';
-import { getOneChallenge, updateChallenge } from '../../services/main';
+import { 
+  getOneChallenge, 
+  updateChallenge, 
+  deleteChallenge, 
+  restartChallenge
+} from '../../services/main';
 import Loading from '../../components/Loading';
+import QuitChallengeModal from '../../components/QuitChallengeModal';
 
 /* Styles imports */
-import { Button, Checkbox, Switch } from '@material-ui/core';
+import { Button, Checkbox, Switch, Modal } from '@material-ui/core';
 import './style.css';
 
 /* Component */ 
@@ -16,7 +22,8 @@ export default class SingleChallenge extends Component {
     streak: 0,
     checked: false,
     switch: false,
-    loading: true
+    loading: true,
+    modalOpen: false
   }
 
   componentDidMount() {
@@ -111,6 +118,33 @@ export default class SingleChallenge extends Component {
     })
   }
 
+  handleOpenModal = () => {
+    this.setState({ modalOpen: true })
+  }
+
+  handleCloseModal = () => {
+    this.setState({ modalOpen: false })
+  }
+
+  quitChallenge = () => {
+    deleteChallenge(this.state.challenge.shortId).then(() => {
+      this.props.updateChallenges();
+      this.props.history.push('/');
+    })
+  }
+
+  renewChallenge = () => {
+    restartChallenge(this.state.challenge, this.state.challenge._id)
+      .then(res => {
+        this.setState({
+          challenge: res.data,
+          selectedDay: res.data.currentDay,
+          switch: !res.data.isPrivate,
+          streak: res.data.completedDays.length,
+        })
+      })
+  }
+
   render() {
     if (this.state.loading) {
       return <Loading />
@@ -177,20 +211,44 @@ export default class SingleChallenge extends Component {
         </div>
 
         <div className='single_side single_right'>
-          <div className='single_share'>
-            <p>Share your progress</p>
-            {this.isUserTheOwner()
-              ? <Switch
-                  checked={this.state.switch}
-                  onChange={this.handleSwitch}
-                  name='switch'
-                />
-              : <Switch
-                  checked={this.state.switch}
-                  name='switch'
-                />
+          <div className='single_right-top'>
+
+            <div className='single_share'>
+              <p>Share your progress</p>
+              {this.isUserTheOwner()
+                ? <Switch
+                    checked={this.state.switch}
+                    onChange={this.handleSwitch}
+                    name='switch'
+                  />
+                : <Switch
+                    checked={this.state.switch}
+                    name='switch'
+                  />
+              }
+            </div>
+
+            {this.isUserTheOwner() &&
+              <div className='single_challenges-btns'>
+                <Button onClick={this.renewChallenge}>
+                  Restart Challenge
+                </Button>
+                <Button onClick={this.handleOpenModal}>
+                  Quit Challenge
+                </Button>
+              </div>
             }
-            
+
+            <Modal 
+              open={this.state.modalOpen}
+              onClose={this.handleCloseModal}
+            >
+              <QuitChallengeModal 
+                quitChallenge={this.quitChallenge}
+                handleCloseModal={this.handleCloseModal}
+              />
+            </Modal>
+
           </div>
 
           <div className='single_calendar'>

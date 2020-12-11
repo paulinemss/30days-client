@@ -15,6 +15,9 @@
   height: 90vh;
   display: flex;
   flex-direction: column;
+}
+
+.single_left {
   justify-content: space-between;
 }
 
@@ -48,10 +51,20 @@
   margin-left: 40px;
 }
 
+.single_right-top {
+  display: flex;
+  flex-direction: column;
+}
+
 .single_share {
   display: flex;
   align-items: center;
   align-self: center;
+}
+
+.single_challenges-btns {
+  display: flex;
+  justify-content: space-between;
 }
 
 .single_numbers {

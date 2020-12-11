@@ -1,7 +1,7 @@
 /* Main imports */ 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getCourses } from '../../services/main';
+import { getCourses, likeCourse, hideCourse } from '../../services/main';
 import CourseCard from '../../components/CourseCard';
 
 /* Styles imports */ 
@@ -27,6 +27,26 @@ export default class Courses extends Component {
   sortCourses = (category) => {
     this.setState({
       selected: category
+    })
+  }
+
+  upvoteCourse = (course) => {
+    const likes = course.likes + 1; 
+
+    likeCourse(course.shortId, likes).then(res => {
+      this.setState({
+        courses: res.data
+      })
+    })
+  }
+
+  deleteCourse = (course) => {
+    console.log('delete this course', course); 
+
+    hideCourse(course.shortId, course).then(res => {
+      this.setState({
+        courses: res.data
+      })
     })
   }
 
@@ -110,6 +130,8 @@ export default class Courses extends Component {
           <CourseCard 
             mode='course'
             course={course} 
+            upvoteCourse={this.upvoteCourse}
+            deleteCourse={this.deleteCourse}
             key={course.shortId}
             canEdit={this.props.user && this.props.user._id === course.author}
           />

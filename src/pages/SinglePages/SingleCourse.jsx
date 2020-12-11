@@ -24,12 +24,14 @@ export default class SingleCourse extends Component {
         .then(res => {
           const challenge = res.data;
 
-          if (this.props.challenges.includes(challenge)) {
-            this.props.history.push(`/challenges/${challenge.shortId}`);
-          } else {
+          if (!this.props.challenges.includes(challenge)) {
             this.props.addChallenge(challenge);
-            this.props.history.push(`/challenges/page/${challenge.shortId}`);
-          }        
+          } 
+
+          this.props.updateChallenges()
+          this.props.history.push(
+            `/challenges/page/${challenge.shortId}`
+          );
         })
         .catch(err => {
           console.log('err', err);

@@ -68,6 +68,14 @@ class App extends React.Component {
     })
   }
 
+  updateChallenges = () => {
+    getChallenges(this.state.user._id).then(res => {
+      this.setState({
+        challenges: res.data
+      })
+    })
+  }
+
   handleLogout = () => {
     const accessToken = localStorage.getItem("accessToken");
     if (!accessToken) {
@@ -149,6 +157,7 @@ class App extends React.Component {
               user={this.state.user}
               challenges={this.state.challenges}
               addChallenge={this.addChallenge}
+              updateChallenges={this.updateChallenges}
             />
 
             <NormalRoute
@@ -165,6 +174,7 @@ class App extends React.Component {
               component={SingleChallenge} 
               user={this.state.user}
               challenges={this.state.challenges}
+              updateChallenges={this.updateChallenges}
             />
 
             <NormalRoute
