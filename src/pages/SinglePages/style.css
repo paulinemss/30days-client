@@ -51,6 +51,10 @@
   margin-left: 40px;
 }
 
+.single_right div {
+  margin-bottom: 20px;
+}
+
 .single_right-top {
   display: flex;
   flex-direction: column;

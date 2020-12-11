@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CourseForm from '../components/CourseForm';
+import PageTitle from '../components/PageTitle'; 
 import { getOneCourse } from '../services/main';
 
 export default class EditCourse extends Component {
@@ -18,7 +19,11 @@ export default class EditCourse extends Component {
   render() {
     return (
       <div>
-        <h1>EDIT COURSE</h1>
+        <PageTitle 
+          mode='create'
+          title='Edit 30 days challenge'
+        />
+
         {this.state.course && 
           <CourseForm 
             course={this.state.course} 

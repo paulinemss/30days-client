@@ -166,7 +166,7 @@ export default class SingleChallenge extends Component {
           </div>
 
           <div className='single_media'>
-            <img src={this.state.challenge.course.image} />
+            <img src={this.state.challenge.course.image} alt='' />
             <div>
               <h1>Day {this.state.selectedDay}</h1>
               <h4>30 days of {this.state.challenge.course.title}</h4>
@@ -176,7 +176,7 @@ export default class SingleChallenge extends Component {
           <div className='single_details'>
             <div className='single_details-top'>
               <div>
-                <p>Today's challenge:</p>
+                <p>Today's challenge</p>
                 <h3>
                   {this.state.challenge.course.days[this.state.selectedDay - 1].title}
                 </h3>
@@ -242,11 +242,13 @@ export default class SingleChallenge extends Component {
             <Modal 
               open={this.state.modalOpen}
               onClose={this.handleCloseModal}
-            >
-              <QuitChallengeModal 
-                quitChallenge={this.quitChallenge}
-                handleCloseModal={this.handleCloseModal}
-              />
+            > 
+              <div>
+                <QuitChallengeModal 
+                  quitChallenge={this.quitChallenge}
+                  handleCloseModal={this.handleCloseModal}
+                />
+              </div>
             </Modal>
 
           </div>

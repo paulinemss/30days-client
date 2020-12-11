@@ -1,48 +1,69 @@
 nav {
+  background-color: #f7f6f3;
+  width: 280px;
+  height: 100vh;
   display: flex;
-  padding: 1em;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  background: #282c34;
-  font-weight: 600;
+  justify-content: space-between;
+  padding: 20px;
 }
 
-.nav__projectName {
-  color: #e4f9ff;
+nav h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.nav_menu {
+  padding: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+nav:hover .hide-button, .hide-button:hover {
+  visibility: visible;
+}
+
+.hide-button {
+  visibility: hidden;
+}
+
+.nav_content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.nav_logo {
+  margin-bottom: 20px;
+}
+
+.nav_links {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav_button {
+  justify-content: flex-start !important;
+  width: 190px;
+  color: rgba(55, 53, 47, 0.8) !important;
+  margin-bottom: 5px !important;
+}
+
+.nav_link {
   text-decoration: none;
 }
 
-.authLink {
-  color: #61dafb;
-  text-decoration: none;
-  transition: color 0.2s ease-in-out;
+.nav_details p {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 20px;
 }
 
-.authLink + .authLink {
-  padding: 1em;
+.nav_details a {
+  color: rgba(0, 0, 0, 0.6);
 }
 
-.authLink:hover {
-  color: #ffffff;
-}
-
-.nav-logoutbtn {
-  font-family: inherit;
-  font-weight: inherit;
-  padding: 0.5em 1em;
-  margin-left: 1em;
-  background-color: #5595ff;
-  box-shadow: 0 0 5px 0 aliceblue;
-  border: none;
-  border-radius: 2px;
-  cursor: pointer;
-  color: #e3f2ff;
-  transition: all 0.2s ease-in-out;
-  position: sticky;
-  top: 0;
-}
-
-.nav-logoutbtn:hover {
-  transform: scale(1.05);
-  background-color: #d13e3e;
+.nav_credits {
+  font-size: 12px !important;
 }

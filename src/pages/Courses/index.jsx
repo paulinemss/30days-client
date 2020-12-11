@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getCourses, likeCourse, hideCourse } from '../../services/main';
 import CourseCard from '../../components/CourseCard';
+import PageTitle from '../../components/PageTitle';
 
 /* Styles imports */ 
 import './style.css';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { Button, IconButton } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
 /* Component */ 
 export default class Courses extends Component {
@@ -62,12 +62,10 @@ export default class Courses extends Component {
     return (
       <div className='courses'>
 
-        <div className='courses_top'>
-          <IconButton aria-label='menu'>
-            <MoreVertIcon />
-          </IconButton>
-          <h1>Browse 30 days challenges</h1>
-        </div>
+        <PageTitle 
+          mode='courses'
+          title='Browse Courses'
+        />
 
         <div className='courses_btns'>
           <div className='courses_btns-left'>

@@ -1,0 +1,50 @@
+.card {
+  padding: 20px;
+  border-radius: 5px;
+  background: #f7f6f3;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card_main {
+  display: flex;
+}
+
+.card_icon {
+  padding: 10px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.card_details {
+  margin-left: 20px;
+}
+
+.card_details h2 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.card_description {
+  margin-bottom: 10px;
+}
+
+.card_details a {
+  text-decoration: none;
+}
+
+.card_likes {
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.card_likes span {
+  margin-left: 5px;
+}

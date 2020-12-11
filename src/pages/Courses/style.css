@@ -3,16 +3,6 @@
   flex-direction: column;
 }
 
-.courses_top {
-  display: flex;
-  margin-bottom: 20px;
-}
-
-.courses_top h1 {
-  font-weight: 600;
-  margin-top: 20px;
-}
-
 .courses_btns {
   display: flex;
   justify-content: space-between;

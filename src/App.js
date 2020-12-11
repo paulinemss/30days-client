@@ -4,10 +4,9 @@ import LoadingComponent from "./components/Loading";
 import Navbar from "./components/Navbar/Navbar";
 import HomePage from "./pages/HomePage";
 import LogIn from "./pages/LogIn";
-import ProtectedPage from "./pages/ProtectedPage";
 import Signup from "./pages/Signup";
 import NormalRoute from "./routing-components/NormalRoute";
-import ProtectedRoute from "./routing-components/ProtectedRoute";
+// import ProtectedRoute from "./routing-components/ProtectedRoute";
 import { getLoggedIn, logout } from "./services/auth";
 import * as PATHS from "./utils/paths";
 
@@ -17,6 +16,7 @@ import CreateCourse from "./pages/CreateCourse";
 import EditCourse from './pages/EditCourse';
 import Challenges from './pages/Challenges';
 import SingleChallenge from './pages/SinglePages/SingleChallenge';
+import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
 import { getChallenges } from './services/main';
 import './App.css';
@@ -118,97 +118,101 @@ class App extends React.Component {
 
     return (
       <>
-        <Navbar handleLogout={this.handleLogout} user={this.state.user} />
-
         <div className="App">
-          <Switch>
+          <Navbar handleLogout={this.handleLogout} user={this.state.user} />
 
-            <NormalRoute 
-              exact 
-              path={PATHS.HOMEPAGE} 
-              component={HomePage} 
-            />
+          <div className="Wrapper">
 
-            <NormalRoute 
-              exact 
-              path='/courses' 
-              component={Courses} 
-              user={this.state.user} 
-            />
+            <Switch>
 
-            <NormalRoute 
-              exact 
-              path='/courses/create' 
-              user={this.state.user}
-              component={CreateCourse}
-            />
+              <NormalRoute 
+                exact 
+                path={PATHS.HOMEPAGE} 
+                component={HomePage} 
+              />
 
-            <NormalRoute 
-              exact 
-              path='/courses/edit/:id' 
-              user={this.state.user}
-              component={EditCourse} 
-            />
+              <NormalRoute 
+                exact 
+                path='/courses' 
+                component={Courses} 
+                user={this.state.user} 
+              />
 
-            <NormalRoute 
-              exact 
-              path='/courses/:id' 
-              component={SingleCourse} 
-              user={this.state.user}
-              challenges={this.state.challenges}
-              addChallenge={this.addChallenge}
-              updateChallenges={this.updateChallenges}
-            />
+              <NormalRoute 
+                exact 
+                path='/courses/create' 
+                user={this.state.user}
+                component={CreateCourse}
+              />
 
-            <NormalRoute
-              exact
-              path='/challenges'
-              user={this.state.user}
-              challenges={this.state.challenges}
-              component={Challenges}
-            />
+              <NormalRoute 
+                exact 
+                path='/courses/edit/:id' 
+                user={this.state.user}
+                component={EditCourse} 
+              />
 
-            <NormalRoute 
-              exact 
-              path='/challenges/page/:id' 
-              component={SingleChallenge} 
-              user={this.state.user}
-              challenges={this.state.challenges}
-              updateChallenges={this.updateChallenges}
-            />
+              <NormalRoute 
+                exact 
+                path='/courses/:id' 
+                component={SingleCourse} 
+                user={this.state.user}
+                challenges={this.state.challenges}
+                addChallenge={this.addChallenge}
+                updateChallenges={this.updateChallenges}
+              />
 
-            <NormalRoute
-              exact
-              path={PATHS.SIGNUPPAGE}
-              authenticate={this.authenticate}
-              component={Signup}
-            />
+              <NormalRoute
+                exact
+                path='/challenges'
+                user={this.state.user}
+                challenges={this.state.challenges}
+                component={Challenges}
+              />
 
-            <NormalRoute
-              exact
-              path={PATHS.LOGINPAGE}
-              authenticate={this.authenticate}
-              component={LogIn}
-            />
+              <NormalRoute 
+                exact 
+                path='/challenges/page/:id' 
+                component={SingleChallenge} 
+                user={this.state.user}
+                challenges={this.state.challenges}
+                updateChallenges={this.updateChallenges}
+              />
 
-            <ProtectedRoute
-              exact
-              path={PATHS.PROTECTEDPAGE}
-              component={ProtectedPage}
-              user={this.state.user}
-            />
+              <NormalRoute 
+                exact 
+                path='/settings' 
+                component={Settings} 
+                user={this.state.user}
+              />
 
-            <NormalRoute
-              exact
-              path='/404'
-              component={NotFound}
-            />
+              <NormalRoute
+                exact
+                path={PATHS.SIGNUPPAGE}
+                authenticate={this.authenticate}
+                component={Signup}
+              />
 
-            <NormalRoute
-              component={NotFound}
-            />
-            
-          </Switch>
+              <NormalRoute
+                exact
+                path={PATHS.LOGINPAGE}
+                authenticate={this.authenticate}
+                component={LogIn}
+              />
+
+              <NormalRoute
+                exact
+                path='/404'
+                component={NotFound}
+              />
+
+              <NormalRoute
+                component={NotFound}
+              />
+              
+            </Switch>
+
+          </div>
         </div>
       </>
     );

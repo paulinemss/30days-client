@@ -11,6 +11,17 @@ body {
   font-family: 'Poppins';
 }
 
+h1 {
+  font-weight: 600;
+}
+
 .App {
-  margin: 20px 40px;
+  display: flex;
+}
+
+.Wrapper {
+  padding: 20px;
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
 }

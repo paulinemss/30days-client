@@ -1,19 +1,27 @@
+/* Main imports */ 
 import React, { Component } from 'react';
-import { FaHeart } from 'react-icons/fa';
-import { Button } from '@material-ui/core';
 import { getOneCourse, startChallenge } from '../../services/main';
-import Logo from '../../components/Logo';
+import Loading from '../../components/Loading';
 
+/* Styles imports */
+import { FaHeart } from 'react-icons/fa';
+import { Button, Checkbox, Switch, Modal } from '@material-ui/core';
+import './style.css';
+
+/* Component */ 
 export default class SingleCourse extends Component {
   state = {
     course: {},
-    currentDetail: ''
+    selectedDay: 1,
+    currentDetail: '',
+    loading: true
   }
 
   componentDidMount() {
     getOneCourse(this.props.match.params.id).then(res => {
       this.setState({ 
-        course: res.data
+        course: res.data,
+        loading: false
       })
     })
   }
@@ -48,38 +56,91 @@ export default class SingleCourse extends Component {
   }
 
   render() {
-    const { title, smallDescription, longDescription, likes, days } = this.state.course; 
+    const { title, smallDescription, longDescription, image, likes, days } = this.state.course; 
+
+    if (this.state.loading) {
+      return <Loading />
+    }
+
+    const dailyChallenge = days[this.state.selectedDay - 1]
 
     return (
-      <div className='course_main'>
-        <div className='course_side left'>
-          <Logo />
-          <h1>{title}</h1>
-          <h3>{smallDescription}</h3>
-          <p>{longDescription}</p>
-          <p>{this.state.currentDetail}</p>
-          <div><FaHeart /> {likes} Likes</div>
+      <div className='single'>
 
-          <Button 
-            variant='outlined' 
-            color='primary' 
-            onClick={this.beginChallenge}
-          >
-            Start 30 day challenge
-          </Button>
+        <div className='single_side single_left'>
+          <div className='single_title'>
+            <h1>30 days of... {title}</h1>
+            <h2>{smallDescription}</h2>
+          </div>
+
+          <div className='single_media'>
+            <img src={image} alt='' />
+            <div>
+              <h1>Day {this.state.selectedDay}</h1>
+              <h4>30 days of {title}</h4>
+            </div>
+          </div>
+
+          <div className='single_details'>
+            <div className='single_details-top'>
+              <div>
+                <p>Day {this.state.selectedDay} Challenge</p>
+                <h3>{dailyChallenge.title}</h3>
+              </div>
+            </div>
+            <div className='single_details-bottom'>
+              <p>{dailyChallenge.description}</p>
+              {dailyChallenge.externalUrl && 
+                <Button>
+                  <a
+                    href={dailyChallenge.externalUrl}
+                    target='_blank'
+                    rel='noreferrer'
+                  >External link</a>
+                </Button>
+              }
+            </div>
+          </div>
         </div>
-        
-        <div className='course_side right'>
-          {days && days.map(day => (
-            <button 
-              className='course_day'
-              key={day.dayNumber} 
-              onClick={() => this.showDayDetails(day.dayNumber)}
+
+        <div className='single_side single_right'>
+          <div className='single_right-top'>
+            <h3>About this course</h3>
+            <p>{longDescription}</p>
+            
+          </div>
+
+          <div className='single_calendar'>
+            <div className='single_calendar-title'>
+              <p>30 days of {title}</p>
+            </div>
+            <div className='single_numbers'>
+              {days.map(day => (
+                <button
+                  className={`
+                    single_calendar-num
+                    ${this.state.selectedDay === day.dayNumber ? 'active' : ''}
+                  `}
+                  key={day._id}
+                >
+                  {day.dayNumber}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className='single_streak'>
+            <Button
+              variant='outlined'
+              color='primary'
+              onClick={this.beginChallenge}
             >
-              {day.dayNumber}
-            </button>
-          ))}
-        </div>        
+              Start 30 days challenge
+            </Button>
+          </div>
+
+        </div>
+
       </div>
     )
   }
