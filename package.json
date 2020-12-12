@@ -12,7 +12,8 @@
     "react-icons": "^4.1.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.1",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "tinycolor2": "^1.4.2"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.6",
@@ -29,7 +30,13 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "indent": [
+        "error",
+        2
+      ]
+    }
   },
   "browserslist": {
     "production": [

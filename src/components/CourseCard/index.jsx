@@ -1,51 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, IconButton } from '@material-ui/core';
-import SpaRoundedIcon from '@material-ui/icons/SpaRounded';
 import ThumbUpAltRoundedIcon from '@material-ui/icons/ThumbUpAltRounded';
 import NavigateNextRoundedIcon from '@material-ui/icons/NavigateNextRounded';
 import DonutLargeRoundedIcon from '@material-ui/icons/DonutLargeRounded';
-import ComputerRoundedIcon from '@material-ui/icons/ComputerRounded';
-import ColorLensRoundedIcon from '@material-ui/icons/ColorLensRounded';
-import EmojiObjectsRoundedIcon from '@material-ui/icons/EmojiObjectsRounded';
-import SportsHandballRoundedIcon from '@material-ui/icons/SportsHandballRounded';
+import { getPrimaryColor } from '../../utils/helpers';
 import './styles.css'; 
 
 const CourseCard = (props) => {
   const { challenge, course, mode, upvoteCourse, deleteCourse } = props;
-  let hexColor, rgbColor, icon;
-
-  if (course.category === 'mindfulness') {
-
-    hexColor = '#2ae2be';
-    rgbColor = 'rgba(42, 226, 190, 0.1)';
-    icon = <SpaRoundedIcon style={{ color: hexColor }} />; 
-
-  } else if (course.category === 'exercise') {
-
-    hexColor = '#feb721';
-    rgbColor = 'rgba(254, 183, 33, 0.1)';
-    icon = <SportsHandballRoundedIcon style={{ color: hexColor }} />; 
-
-  } else if (course.category === 'tech') {
-    
-    hexColor = '#6289ff';
-    rgbColor = 'rgba(98, 137, 255, 0.1)';
-    icon = <ComputerRoundedIcon style={{ color: hexColor }} />; 
-
-  } else if (course.category === 'arts') {
-
-    hexColor = '#995AE8';
-    rgbColor = 'rgba(153, 90, 232, 0.1)';
-    icon = <ColorLensRoundedIcon style={{ color: hexColor }} />; 
-
-  } else if (course.category === 'other') {
-
-    hexColor = '#ff7f7e';
-    rgbColor = 'rgba(255, 127, 126, 0.1)';
-    icon = <EmojiObjectsRoundedIcon style={{ color: hexColor }} />; 
-
-  }
+  const { hexColor, rgbColor, icon } = getPrimaryColor(course.category);
 
   return (
     <div className='card'>

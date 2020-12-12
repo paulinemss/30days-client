@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { getCourses, likeCourse, hideCourse } from '../../services/main';
 import CourseCard from '../../components/CourseCard';
 import PageTitle from '../../components/PageTitle';
+import { colors } from '../../utils/helpers';
 
 /* Styles imports */ 
 import './style.css';
@@ -82,7 +83,7 @@ export default class Courses extends Component {
 
             <Button
               startIcon={<FiberManualRecordRoundedIcon 
-                style={{ color: '#2ae2be', fontSize: '12px' }}
+                style={{ color: colors.mindfulness, fontSize: '12px' }}
               />}
               className={this.state.selected === 'mindfulness' 
                 ? 'sort-button active'
@@ -95,7 +96,7 @@ export default class Courses extends Component {
 
             <Button
               startIcon={<FiberManualRecordRoundedIcon 
-                style={{ color: '#feb721', fontSize: '12px' }}
+                style={{ color: colors.exercise, fontSize: '12px' }}
               />}
               className={this.state.selected === 'exercise' 
                 ? 'sort-button active'
@@ -108,7 +109,7 @@ export default class Courses extends Component {
 
             <Button
               startIcon={<FiberManualRecordRoundedIcon 
-                style={{ color: '#6289ff', fontSize: '12px' }}
+                style={{ color: colors.tech, fontSize: '12px' }}
               />}
               className={this.state.selected === 'tech' 
                 ? 'sort-button active'
@@ -121,7 +122,7 @@ export default class Courses extends Component {
 
             <Button
               startIcon={<FiberManualRecordRoundedIcon 
-                style={{ color: '#995AE8', fontSize: '12px' }}
+                style={{ color: colors.arts, fontSize: '12px' }}
               />}
               className={this.state.selected === 'arts' 
                 ? 'sort-button active'
@@ -134,7 +135,7 @@ export default class Courses extends Component {
 
             <Button
               startIcon={<FiberManualRecordRoundedIcon 
-                style={{ color: '#ff7f7e', fontSize: '12px' }}
+                style={{ color: colors.other, fontSize: '12px' }}
               />}
               className={this.state.selected === 'other' 
                 ? 'sort-button active'

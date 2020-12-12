@@ -8,9 +8,18 @@ import {
 } from '../../services/main';
 import Loading from '../../components/Loading';
 import QuitChallengeModal from '../../components/QuitChallengeModal';
+import { getPrimaryColor } from '../../utils/helpers';
 
 /* Styles imports */
-import { Button, Checkbox, Switch, Modal } from '@material-ui/core';
+import { 
+  Button, 
+  Checkbox, 
+  Switch, 
+  Modal, 
+  FormControlLabel,
+  Divider
+} from '@material-ui/core';
+import tinycolor from 'tinycolor2';
 import './style.css';
 
 /* Component */ 
@@ -23,7 +32,8 @@ export default class SingleChallenge extends Component {
     checked: false,
     switch: false,
     loading: true,
-    modalOpen: false
+    modalOpen: false,
+    colors: {}
   }
 
   componentDidMount() {
@@ -36,7 +46,8 @@ export default class SingleChallenge extends Component {
             loading: false,
             switch: !res.data.isPrivate,
             streak: res.data.completedDays.length,
-            greeting: this.updateGreeting()
+            greeting: this.updateGreeting(),
+            colors: getPrimaryColor(res.data.course.category)
           })
         } else {
           this.props.history.push('/404');
@@ -92,7 +103,6 @@ export default class SingleChallenge extends Component {
       .then(res => {
         this.setState({
           challenge: res.data,
-          selectedDay: res.data.currentDay,
           streak: res.data.completedDays.length
         })
       })
@@ -152,8 +162,7 @@ export default class SingleChallenge extends Component {
 
     return (
       <div className='single'>
-
-        <div className='single_side single_left'>
+        <div class='header'>
           <div className='single_title'>
             <h1>
               {this.isUserTheOwner()
@@ -164,70 +173,7 @@ export default class SingleChallenge extends Component {
             </h1>
             <h2>How do you feel today?</h2>
           </div>
-
-          <div className='single_media'>
-            <img src={this.state.challenge.course.image} alt='' />
-            <div>
-              <h1>Day {this.state.selectedDay}</h1>
-              <h4>30 days of {this.state.challenge.course.title}</h4>
-            </div>
-          </div>
-
-          <div className='single_details'>
-            <div className='single_details-top'>
-              <div>
-                <p>Today's challenge</p>
-                <h3>
-                  {this.state.challenge.course.days[this.state.selectedDay - 1].title}
-                </h3>
-              </div>
-              <div>
-                {this.isUserTheOwner()
-                  ? <Checkbox
-                      checked={this.state.challenge.completedDays.includes(this.state.selectedDay)}
-                      onChange={this.handleChecked}
-                    />
-                  : <Checkbox
-                      checked={this.state.challenge.completedDays.includes(this.state.selectedDay)}
-                    />
-                }
-              </div>
-            </div>
-
-            <div className='single_details-bottom'>
-              <p>{this.state.challenge.course.days[this.state.selectedDay - 1].description}</p>
-
-              {this.state.challenge.course.days[this.state.selectedDay - 1].externalUrl && <Button>
-                <a 
-                  href={this.state.challenge.course.days[this.state.selectedDay - 1].externalUrl}
-                  target='_blank'
-                  rel='noreferrer'
-                > 
-                  External link
-                </a>
-              </Button>}
-            </div>
-          </div>
-        </div>
-
-        <div className='single_side single_right'>
           <div className='single_right-top'>
-
-            <div className='single_share'>
-              <p>Share your progress</p>
-              {this.isUserTheOwner()
-                ? <Switch
-                    checked={this.state.switch}
-                    onChange={this.handleSwitch}
-                    name='switch'
-                  />
-                : <Switch
-                    checked={this.state.switch}
-                    name='switch'
-                  />
-              }
-            </div>
-
             {this.isUserTheOwner() &&
               <div className='single_challenges-btns'>
                 <Button onClick={this.renewChallenge}>
@@ -251,36 +197,136 @@ export default class SingleChallenge extends Component {
               </div>
             </Modal>
 
-          </div>
-
-          <div className='single_calendar'>
-            <div className='single_calendar-title'>
-              <p>30 days of {this.state.challenge.course.title}</p>
+            <div className='single_share'>
+              <p>Share your progress</p>
+              {this.isUserTheOwner()
+                ? <Switch
+                  checked={this.state.switch}
+                  onChange={this.handleSwitch}
+                  name='switch'
+                />
+                : <Switch
+                  checked={this.state.switch}
+                  name='switch'
+                />
+              }
             </div>
-            <div className='single_numbers'>
-              {this.state.challenge.course.days.map(day => (
-                <button 
-                  onClick={() => this.selectDay(day.dayNumber)}
-                  className={`
-                    single_calendar-num 
-                    ${this.state.selectedDay === day.dayNumber ? 'active' : ''}
-                    ${this.state.challenge.completedDays.includes(day.dayNumber) ? 'completed' : ''}
-                    `}
-                  key={day._id}
-                >
-                  {day.dayNumber}
-                </button>
-              ))}
-            </div>
-          </div>
 
-          <div className='single_streak'>
-            <h1>{this.state.streak}</h1>
-            <p>Your current streak</p>
           </div>
-
         </div>
-      
+        <Divider />
+        <div className='content'>
+          <div className='single_side single_left'>
+            <div className='single_media'>
+              <img src={this.state.challenge.course.image} alt='' />
+              <div>
+                <h1>Day {this.state.selectedDay}</h1>
+                <h4>30 days of {this.state.challenge.course.title}</h4>
+
+                <div className='single_checkbox-div'>
+                  {this.isUserTheOwner()
+                    ? <Button className='single_checkbox-btn' style={{ backgroundColor: this.state.colors.hexColor }}><FormControlLabel
+                      value="end"
+                      control={<Checkbox
+                        checked={this.state.challenge.completedDays.includes(this.state.selectedDay)}
+                        onChange={this.handleChecked}
+                        style={{ color: 'white' }}
+                      />}
+                      label={this.state.challenge.completedDays.includes(this.state.selectedDay) ? 'Completed' : "Complete Day"}
+                      labelPlacement="end"
+                    /></Button>
+                    : <Button className='single_checkbox-btn' style={{ backgroundColor: this.state.colors.hexColor }}><FormControlLabel
+                      value="end"
+                      control={<Checkbox
+                        checked={this.state.challenge.completedDays.includes(this.state.selectedDay)}
+                        style={{ color: 'white' }}
+                      />}
+                      label={this.state.challenge.completedDays.includes(this.state.selectedDay) ? 'Completed' : "Complete Day"}
+                      labelPlacement="end"
+                    /></Button>
+                  }
+                </div>
+
+              </div>
+            </div>
+
+            <div className='single_details'>
+              <div className='single_details-top'>
+                <div>
+                  <p>Today's challenge</p>
+                  <h3>
+                    {this.state.challenge.course.days[this.state.selectedDay - 1].title}
+                  </h3>
+                </div>
+              </div>
+
+              <div className='single_details-bottom'>
+                <p>{this.state.challenge.course.days[this.state.selectedDay - 1].description}</p>
+
+                {this.state.challenge.course.days[this.state.selectedDay - 1].externalUrl && <Button>
+                  <a 
+                    href={this.state.challenge.course.days[this.state.selectedDay - 1].externalUrl}
+                    target='_blank'
+                    rel='noreferrer'
+                  > 
+                  External link
+                  </a>
+                </Button>}
+              </div>
+            </div>
+
+          </div>
+
+          <div className='single_side single_right'>
+            <div className='single_calendar'>
+              <div className='single_calendar-title'>
+                <p>30 days of {this.state.challenge.course.title}</p>
+              </div>
+              <div className='single_numbers'>
+                {this.state.challenge.course.days.map(day => {
+
+                  const selected = this.state.selectedDay === day.dayNumber;
+                  const completed = this.state.challenge.completedDays.includes(day.dayNumber);
+
+                  let color, backgroundColor; 
+
+                  if (selected && completed) {
+                    color = '#fff';
+                    backgroundColor = tinycolor(this.state.colors.hexColor).darken(10).toString()
+
+                  } else if (completed) {
+                    color = '#fff';
+                    backgroundColor = this.state.colors.hexColor;
+
+                  } else if (selected && !completed) {
+                    color = this.state.colors.hexColor;
+                    backgroundColor = this.state.colors.rgbColor;
+
+                  } else {
+                    color = '#161616';
+                    backgroundColor = '#fff';
+
+                  }
+
+                  return (
+                    <button 
+                      onClick={() => this.selectDay(day.dayNumber)}
+                      className={`single_calendar-num`}
+                      style={{ color, backgroundColor }}
+                      key={day._id}
+                    >
+                      {day.dayNumber}
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+            <div className='single_streak'>
+              <h1>{this.state.streak}</h1>
+              <p>Your current streak</p>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

@@ -1,7 +1,15 @@
 .single {
   display: flex;
+  flex-flow: column;
 }
-
+.content {
+  padding-top: 40px;
+  display: flex;
+}
+.header {
+  display: flex;
+  padding-bottom: 40px;
+}
 .single h1 {
   font-weight: 600;
 }
@@ -12,34 +20,35 @@
 
 .single_side {
   width: 50%; 
-  height: 90vh;
   display: flex;
   flex-direction: column;
 }
 
 .single_left {
-  justify-content: space-between;
+  flex-grow: 1;
 }
 
 .single_media {
   display: flex;
   align-items: center;
   text-align: center;
-  justify-content: center;
 }
 
 .single_media img {
-  width: 150px;
-  height: 250px;
+  width: 300px;
+  height: 300px;
   object-fit: cover;
-  margin-right: 20px;
+  margin-right: 80px;
 }
 
-.single_details {
-  border: 1px solid #161616;
-  padding: 20px;
-  max-height: 200px;
-  overflow-y: scroll;
+.single_checkbox-div {
+  margin-top: 20px;
+}
+
+.single_checkbox-btn {
+  color: #fff !important;
+  border-radius: 10px;
+  padding-left: 20px !important;
 }
 
 .single_details-top {
@@ -47,8 +56,15 @@
   justify-content: space-between;
 }
 
+.single_details-top h3 {
+  font-size: 28px;
+  margin-bottom: 14px;
+  line-height: 1;
+}
+
 .single_right {
   margin-left: 40px;
+  width: 400px;
 }
 
 .single_right div {
@@ -57,7 +73,8 @@
 
 .single_right-top {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  margin-left: auto;
 }
 
 .single_share {
@@ -78,7 +95,6 @@
 
 .single_calendar {
   padding: 20px;
-  border: 1px solid #161616;
   display: flex;
   flex-direction: column;
 }
@@ -89,11 +105,12 @@
 }
 
 .single_calendar-num {
-  border: 1px solid #161616;
   background: none;
   cursor: pointer;
   width: 40px;
   height: 40px;
+  border-radius: 4px;
+  border: none;
   margin-right: 10px;
   margin-bottom: 10px;
   display: flex;
@@ -102,20 +119,11 @@
   outline: none;
 }
 
-.single_calendar-num.active {
-  border: 1px solid #ec615b;
-  color: #ec615b;
-  box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.06)
-}
-
-.single_calendar-num.completed {
-  border: 1px solid #ec615b;
-  background-color: #ec615b;
-  color: #fff;
+.single_calendar-num:hover {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
 
 .single_streak {
-  border: 1px solid #161616;
   padding: 20px;
   display: flex;
   flex-direction: column;
