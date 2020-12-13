@@ -34,8 +34,10 @@ nav:hover .hide-button, .hide-button:hover {
   justify-content: space-between;
 }
 
-.nav_logo {
-  margin-bottom: 20px;
+.nav_logo img {
+  width: 200px;
+  margin-left: -15px;
+  margin-top: -15px;
 }
 
 .nav_links {

@@ -6,10 +6,12 @@
   padding-top: 40px;
   display: flex;
 }
+
 .header {
   display: flex;
   padding-bottom: 40px;
 }
+
 .single h1 {
   font-weight: 600;
 }
@@ -32,6 +34,7 @@
   display: flex;
   align-items: center;
   text-align: center;
+  margin-bottom: 40px;
 }
 
 .single_media img {

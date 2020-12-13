@@ -49,3 +49,7 @@
 .card_likes span {
   margin-left: 5px;
 }
+
+.card_completed-days {
+  width: 350px;
+}

@@ -19,6 +19,7 @@ import {
   FormControlLabel,
   Divider
 } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 import tinycolor from 'tinycolor2';
 import './style.css';
 
@@ -101,6 +102,7 @@ export default class SingleChallenge extends Component {
 
     updateChallenge(challenge, this.state.challenge._id)
       .then(res => {
+        this.props.updateChallenges();
         this.setState({
           challenge: res.data,
           streak: res.data.completedDays.length
@@ -160,13 +162,29 @@ export default class SingleChallenge extends Component {
       return <Loading />
     }
 
+    const username = this.props.user.username.slice(0, 7);
+    
+    const ColorfulSwitch = withStyles({
+      switchBase: {
+        color: this.state.colors.hexColor,
+        '&$checked': {
+          color: this.state.colors.hexColor,
+        },
+        '&$checked + $track': {
+          backgroundColor: this.state.colors.hexColor,
+        },
+      },
+      checked: {},
+      track: {},
+    })(Switch);
+
     return (
       <div className='single'>
-        <div class='header'>
+        <div className='header'>
           <div className='single_title'>
             <h1>
               {this.isUserTheOwner()
-                ? <span>{this.state.greeting}, {this.props.user.username}</span>
+                ? <span>{this.state.greeting}, {username}</span>
                 : <span>{this.state.greeting}</span>
               }
               
@@ -200,12 +218,13 @@ export default class SingleChallenge extends Component {
             <div className='single_share'>
               <p>Share your progress</p>
               {this.isUserTheOwner()
-                ? <Switch
+                ? <ColorfulSwitch
+                  thumbSwitchedStyle={{ backgroundColor: 'grey' }}
                   checked={this.state.switch}
                   onChange={this.handleSwitch}
                   name='switch'
                 />
-                : <Switch
+                : <ColorfulSwitch
                   checked={this.state.switch}
                   name='switch'
                 />
@@ -214,7 +233,9 @@ export default class SingleChallenge extends Component {
 
           </div>
         </div>
+
         <Divider />
+
         <div className='content'>
           <div className='single_side single_left'>
             <div className='single_media'>

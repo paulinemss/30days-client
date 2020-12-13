@@ -34,86 +34,87 @@ export default class Navbar extends Component {
 
             <div>
               <div className='nav_logo'>
-                <h2>30 days</h2>
+                {/* <h2>30 days</h2> */}
+                <img src='/logo.png' alt='30 days logo' />
               </div>
 
               <div className='nav_links'>
                 {this.props.user
                   ? <>
-                      <Link className='nav_link' to='/'>
-                        <Button 
-                          className='nav_button' 
-                          startIcon={<HomeRoundedIcon />}
-                        >
+                    <Link className='nav_link' to='/'>
+                      <Button 
+                        className='nav_button' 
+                        startIcon={<HomeRoundedIcon />}
+                      >
                           Home
-                        </Button>
-                      </Link>
-                      <Link className='nav_link' to='/challenges'>
-                        <Button 
-                          className='nav_button'
-                          startIcon={<LibraryAddCheckRoundedIcon />}
-                        >
+                      </Button>
+                    </Link>
+                    <Link className='nav_link' to='/challenges'>
+                      <Button 
+                        className='nav_button'
+                        startIcon={<LibraryAddCheckRoundedIcon />}
+                      >
                           My Challenges
-                        </Button>
-                      </Link>
-                      <Link className='nav_link' to='/courses'>
-                        <Button 
-                          className='nav_button'
-                          startIcon={<LibraryBooksRoundedIcon />}
-                        >
+                      </Button>
+                    </Link>
+                    <Link className='nav_link' to='/courses'>
+                      <Button 
+                        className='nav_button'
+                        startIcon={<LibraryBooksRoundedIcon />}
+                      >
                           Browse Courses
-                        </Button>
-                      </Link>
-                      <Link className='nav_link' to='/settings'>
-                        <Button
-                          className='nav_button'
-                          startIcon={<SettingsRoundedIcon />}
-                        >
+                      </Button>
+                    </Link>
+                    <Link className='nav_link' to='/settings'>
+                      <Button
+                        className='nav_button'
+                        startIcon={<SettingsRoundedIcon />}
+                      >
                           Settings
-                        </Button>
-                      </Link>
+                      </Button>
+                    </Link>
+                    <Button 
+                      className='nav_button'
+                      startIcon={<ExitToAppRoundedIcon />}
+                      onClick={this.props.handleLogout}
+                    >
+                        Logout
+                    </Button>
+                  </>
+                  : <>
+                    <Link className='nav_link' to='/'>
+                      <Button 
+                        className='nav_button' 
+                        startIcon={<HomeRoundedIcon />}
+                      >
+                          Home
+                      </Button>
+                    </Link>
+                    <Link className='nav_link' to='/courses'>
+                      <Button 
+                        className='nav_button'
+                        startIcon={<LibraryBooksRoundedIcon />}
+                      >
+                          Browse Courses
+                      </Button>
+                    </Link>
+                    <Link className='nav_link' to='/auth/login'>
                       <Button 
                         className='nav_button'
                         startIcon={<ExitToAppRoundedIcon />}
-                        onClick={this.props.handleLogout}
                       >
-                        Logout
-                      </Button>
-                    </>
-                  : <>
-                      <Link className='nav_link' to='/'>
-                        <Button 
-                          className='nav_button' 
-                          startIcon={<HomeRoundedIcon />}
-                        >
-                          Home
-                        </Button>
-                      </Link>
-                      <Link className='nav_link' to='/courses'>
-                        <Button 
-                          className='nav_button'
-                          startIcon={<LibraryBooksRoundedIcon />}
-                        >
-                          Browse Courses
-                        </Button>
-                      </Link>
-                      <Link className='nav_link' to='/auth/login'>
-                        <Button 
-                          className='nav_button'
-                          startIcon={<ExitToAppRoundedIcon />}
-                        >
                           Login
-                        </Button>
-                      </Link>
-                      <Link className='nav_link' to='/auth/signup'>
-                        <Button 
-                          className='nav_button'
-                          startIcon={<LibraryAddCheckRoundedIcon />}
-                        >
+                      </Button>
+                    </Link>
+                    <Link className='nav_link' to='/auth/signup'>
+                      <Button 
+                        className='nav_button'
+                        startIcon={<LibraryAddCheckRoundedIcon />}
+                      >
                           Signup
-                        </Button>
-                      </Link>
-                    </>
+                      </Button>
+                    </Link>
+                  </>
                 }
               </div>
             </div>
