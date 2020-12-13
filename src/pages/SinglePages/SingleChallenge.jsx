@@ -157,12 +157,14 @@ export default class SingleChallenge extends Component {
       })
   }
 
+  joinChallenge = () => {
+
+  }
+
   render() {
     if (this.state.loading) {
       return <Loading />
     }
-
-    const username = this.props.user.username.slice(0, 7);
     
     const ColorfulSwitch = withStyles({
       switchBase: {
@@ -182,26 +184,41 @@ export default class SingleChallenge extends Component {
       <div className='single'>
         <div className='header'>
           <div className='single_title'>
-            <h1>
-              {this.isUserTheOwner()
-                ? <span>{this.state.greeting}, {username}</span>
-                : <span>{this.state.greeting}</span>
-              }
-              
-            </h1>
-            <h2>How do you feel today?</h2>
+
+            {this.isUserTheOwner()
+              ? <>
+                <h1>
+                  {this.state.greeting}, {this.props.user.username}
+                </h1>
+                <h2>How do you feel today?</h2>
+              </>
+              : <>
+                <h1>
+                  {this.state.challenge.owner.username}'s challenge
+                </h1>
+                <h2>30 days of {this.state.challenge.course.title}</h2>
+              </>
+            }
+
           </div>
           <div className='single_right-top'>
-            {this.isUserTheOwner() &&
-              <div className='single_challenges-btns'>
-                <Button onClick={this.renewChallenge}>
-                  Restart Challenge
-                </Button>
-                <Button onClick={this.handleOpenModal}>
-                  Quit Challenge
-                </Button>
-              </div>
-            }
+            <div className='single_challenges-btns'>
+              {this.isUserTheOwner() 
+                ? <>
+                  <Button className='top-btns' onClick={this.renewChallenge}>
+                    Restart Challenge
+                  </Button>
+                  <Button className='top-btns' onClick={this.handleOpenModal}>
+                    Quit Challenge
+                  </Button>
+                </>
+                : <>
+                  <Button className='top-btns' onClick={this.joinChallenge}>
+                    Join Challenge
+                  </Button>
+                </>
+              }
+            </div>
 
             <Modal 
               open={this.state.modalOpen}
@@ -215,19 +232,30 @@ export default class SingleChallenge extends Component {
               </div>
             </Modal>
 
-            <div className='single_share'>
-              <p>Share your progress</p>
+            <div 
+              className='single_share'
+              style={{ 
+                backgroundColor: this.state.colors.rgbColor,
+                color: this.state.colors.hexColor
+              }}
+            >
               {this.isUserTheOwner()
-                ? <ColorfulSwitch
-                  thumbSwitchedStyle={{ backgroundColor: 'grey' }}
-                  checked={this.state.switch}
-                  onChange={this.handleSwitch}
-                  name='switch'
-                />
-                : <ColorfulSwitch
-                  checked={this.state.switch}
-                  name='switch'
-                />
+                ? <>
+                  <ColorfulSwitch
+                    thumbSwitchedStyle={{ backgroundColor: 'grey' }}
+                    checked={this.state.switch}
+                    onChange={this.handleSwitch}
+                    name='switch'
+                  />
+                  <p>Share your progress</p>
+                </>
+                : <>
+                  <ColorfulSwitch
+                    checked={this.state.switch}
+                    name='switch'
+                  />
+                  <p>This challenge is public</p>
+                </>
               }
             </div>
 

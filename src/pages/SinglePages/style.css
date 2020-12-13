@@ -9,7 +9,7 @@
 
 .header {
   display: flex;
-  padding-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .single h1 {
@@ -70,25 +70,33 @@
   width: 400px;
 }
 
-.single_right div {
-  margin-bottom: 20px;
-}
-
 .single_right-top {
   display: flex;
   justify-content: space-between;
   margin-left: auto;
+  align-self: flex-end;
 }
 
 .single_share {
   display: flex;
+  flex-direction: column;
   align-items: center;
   align-self: center;
+  border-radius: 5px; 
+  width: 130px;
+  height: 100px;
+  text-align: center;
 }
 
 .single_challenges-btns {
   display: flex;
   justify-content: space-between;
+}
+
+.top-btns {
+  height: 30px !important;
+  align-self: flex-end;
+  margin-right: 20px !important;
 }
 
 .single_numbers {
