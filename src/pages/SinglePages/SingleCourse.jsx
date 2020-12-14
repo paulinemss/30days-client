@@ -1,11 +1,11 @@
 /* Main imports */ 
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { getOneCourse, startChallenge } from '../../services/main';
 import Loading from '../../components/Loading';
 
 /* Styles imports */
-import { FaHeart } from 'react-icons/fa';
-import { Button, Checkbox, Switch, Modal } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import './style.css';
 
 /* Component */ 
@@ -55,8 +55,19 @@ export default class SingleCourse extends Component {
     })
   }
 
+  isUserTheAuthor = () => {
+    if (!this.props.user) { return false }
+    return this.state.course.author === this.props.user._id; 
+  }
+
   render() {
-    const { title, smallDescription, longDescription, image, likes, days } = this.state.course; 
+    const { 
+      title, 
+      smallDescription, 
+      longDescription, 
+      image, 
+      days 
+    } = this.state.course; 
 
     if (this.state.loading) {
       return <Loading />
@@ -137,6 +148,12 @@ export default class SingleCourse extends Component {
             >
               Start 30 days challenge
             </Button>
+
+            {this.isUserTheAuthor() && <Button>
+              <Link to={`/courses/edit/${this.state.course.shortId}`}>
+                Edit Course
+              </Link>
+            </Button>}
           </div>
 
         </div>

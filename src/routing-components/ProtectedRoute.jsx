@@ -6,7 +6,7 @@ import * as PATHS from "../utils/paths";
 const ProtectedRoute = ({ user, exact, to, component, ...componentProps }) => {
   const Component = component;
   if (!user) {
-    return <Redirect to={PATHS.LOGINPAGE} />;
+    return <Redirect to={PATHS.HOMEPAGE} />;
   }
   return (
     <Route

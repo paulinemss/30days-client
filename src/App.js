@@ -3,10 +3,8 @@ import { Switch } from "react-router-dom";
 import LoadingComponent from "./components/Loading";
 import Navbar from "./components/Navbar/Navbar";
 import HomePage from "./pages/HomePage";
-import LogIn from "./pages/LogIn";
-import Signup from "./pages/Signup";
 import NormalRoute from "./routing-components/NormalRoute";
-// import ProtectedRoute from "./routing-components/ProtectedRoute";
+import ProtectedRoute from "./routing-components/ProtectedRoute";
 import { getLoggedIn, logout } from "./services/auth";
 import * as PATHS from "./utils/paths";
 
@@ -18,6 +16,8 @@ import Challenges from './pages/Challenges';
 import SingleChallenge from './pages/SinglePages/SingleChallenge';
 import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
+import Auth from './pages/Auth'; 
+
 import { getChallenges } from './services/main';
 import './App.css';
 
@@ -77,6 +77,7 @@ class App extends React.Component {
   }
 
   handleLogout = () => {
+    console.log('logging out...')
     const accessToken = localStorage.getItem("accessToken");
     if (!accessToken) {
       return this.setState({
@@ -94,7 +95,6 @@ class App extends React.Component {
             // deal with error here
             console.log("SOMETHING HAPPENED", res);
           }
-
           localStorage.removeItem("accessToken");
           return this.setState({
             isLoading: false,
@@ -106,9 +106,12 @@ class App extends React.Component {
   };
 
   authenticate = (user) => {
-    this.setState({
-      user,
-    });
+    getChallenges(user._id).then(res => {
+      this.setState({
+        user,
+        challenges: res.data
+      })
+    })
   };
 
   render() {
@@ -162,7 +165,7 @@ class App extends React.Component {
                 updateChallenges={this.updateChallenges}
               />
 
-              <NormalRoute
+              <ProtectedRoute
                 exact
                 path='/challenges'
                 user={this.state.user}
@@ -179,7 +182,7 @@ class App extends React.Component {
                 updateChallenges={this.updateChallenges}
               />
 
-              <NormalRoute 
+              <ProtectedRoute 
                 exact 
                 path='/settings' 
                 component={Settings} 
@@ -188,16 +191,9 @@ class App extends React.Component {
 
               <NormalRoute
                 exact
-                path={PATHS.SIGNUPPAGE}
-                authenticate={this.authenticate}
-                component={Signup}
-              />
-
-              <NormalRoute
-                exact
                 path={PATHS.LOGINPAGE}
                 authenticate={this.authenticate}
-                component={LogIn}
+                component={Auth}
               />
 
               <NormalRoute

@@ -13,7 +13,7 @@ import './Navbar.css';
 
 export default class Navbar extends Component {
   state = {
-    showNavbar: false
+    showNavbar: true
   }
 
   hideNavbar = () => {
@@ -104,14 +104,6 @@ export default class Navbar extends Component {
                         startIcon={<ExitToAppRoundedIcon />}
                       >
                           Login
-                      </Button>
-                    </Link>
-                    <Link className='nav_link' to='/auth/signup'>
-                      <Button 
-                        className='nav_button'
-                        startIcon={<LibraryAddCheckRoundedIcon />}
-                      >
-                          Signup
                       </Button>
                     </Link>
                   </>

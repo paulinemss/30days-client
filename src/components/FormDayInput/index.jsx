@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TextField, IconButton } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import * as Styles from './styles'; 
+import './styles.css';
 
 export default class index extends Component {
   state = {
@@ -30,48 +30,68 @@ export default class index extends Component {
 
   render() {
     return (
-      <Styles.DayInput>
-        <h3>{this.state.day.dayNumber}</h3>
-        
-        <TextField 
-          variant='outlined'
-          label='Title'
-          type='text'
-          name='title'
-          id='dayTitle'
-          value={this.state.day.title}
-          onChange={this.handleChange}
-        />
+      <div className='form_day'>
 
-        <TextField 
-          variant='outlined'
-          label='Description'
-          type='text'
-          name='description'
-          id='dayDescription'
-          value={this.state.day.description}
-          onChange={this.handleChange}
-        />
-        
-        <TextField 
-          variant='outlined'
-          label='External Url' 
-          type='link'
-          name='externalUrl'
-          id='dayExternalUrl'
-          value={this.state.day.externalUrl}
-          onChange={this.handleChange}
-        /> 
-
-        <IconButton 
-          disabled={this.state.day.dayNumber === 1}
-          aria-label='delete'
-          onClick={() => this.props.removeDay(this.state.day.dayNumber)} 
+        <h3
+          className='form_dayNumber'
+          style={{ 
+            color: this.props.color.hexColor,
+            backgroundColor: this.props.color.rgbColor
+          }}
         >
-          <DeleteIcon fontSize="small" />
-        </IconButton>
+          {this.state.day.dayNumber}
+        </h3>
+
+        <div className='form_mid'>
+          <div>        
+            <TextField 
+              className='form_dayTitle'
+              variant='outlined'
+              label='Title'
+              type='text'
+              name='title'
+              id='dayTitle'
+              value={this.state.day.title}
+              onChange={this.handleChange}
+            />
         
-      </Styles.DayInput>
+            <TextField 
+              className='form_dayURL'
+              variant='outlined'
+              label='External Url' 
+              type='link'
+              name='externalUrl'
+              id='dayExternalUrl'
+              value={this.state.day.externalUrl}
+              onChange={this.handleChange}
+            /> 
+          </div>
+
+          <TextField 
+            className='form_dayDescription'
+            variant='outlined'
+            label='Description'
+            multiline
+            rows={2}
+            type='text'
+            name='description'
+            id='dayDescription'
+            value={this.state.day.description}
+            onChange={this.handleChange}
+          />
+        </div>
+        
+        <div>
+          <IconButton 
+            disabled={this.state.day.dayNumber === 1}
+            aria-label='delete'
+            onClick={() => this.props.removeDay(this.state.day.dayNumber)} 
+          >
+            <DeleteIcon fontSize="small" />
+          </IconButton>
+        </div>
+
+      </div>
     )
   }
 }

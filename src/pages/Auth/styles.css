@@ -1,0 +1,43 @@
+.auth {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth_title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.auth_subtitle {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.auth_logo {
+  width: 150px;
+}
+
+.auth_tabs {
+  margin-bottom: 40px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth_input {
+  margin-bottom: 20px !important;
+}
+
+.auth_submit {
+  color: #fff !important;
+  background: rgb(255,127,126);
+  background: linear-gradient(135deg, rgba(255,127,126,1) 37%, rgba(254,183,33,1) 100%);
+}
+
+.PrivateTabIndicator-colorPrimary-2 {
+  background: linear-gradient(135deg, rgba(255,127,126,1) 37%, rgba(254,183,33,1) 100%);
+}

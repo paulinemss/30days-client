@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CourseForm from '../components/CourseForm';
+import MainForm from '../components/Form/MainForm'; 
 import PageTitle from '../components/PageTitle'; 
 
 export default class CreateCourse extends Component {
@@ -10,7 +10,7 @@ export default class CreateCourse extends Component {
           mode='create'
           title='Create 30 days challenge'
         />
-        <CourseForm 
+        <MainForm
           mode='create'
           user={this.props.user}
         />

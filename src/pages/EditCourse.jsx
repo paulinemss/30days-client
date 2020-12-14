@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CourseForm from '../components/CourseForm';
+import MainForm from '../components/Form/MainForm'; 
 import PageTitle from '../components/PageTitle'; 
 import { getOneCourse } from '../services/main';
 
@@ -25,7 +25,7 @@ export default class EditCourse extends Component {
         />
 
         {this.state.course && 
-          <CourseForm 
+          <MainForm 
             course={this.state.course} 
             mode='edit' 
             user={this.props.user}
