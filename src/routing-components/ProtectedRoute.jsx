@@ -6,7 +6,10 @@ import * as PATHS from "../utils/paths";
 const ProtectedRoute = ({ user, exact, to, component, ...componentProps }) => {
   const Component = component;
   if (!user) {
-    return <Redirect to={PATHS.HOMEPAGE} />;
+    return <Redirect to={{
+      pathname: PATHS.LOGINPAGE,
+      state: { referrer: componentProps.path }
+    }} />;
   }
   return (
     <Route

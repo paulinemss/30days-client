@@ -45,7 +45,9 @@ export default class SingleCourse extends Component {
           console.log('err', err);
         })
     } else {
-      this.props.history.push("/auth/login");
+      this.props.history.push('/auth/login', {
+        referrer: this.props.history.location.pathname
+      }); 
     }
   }
 

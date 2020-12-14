@@ -106,7 +106,7 @@ class App extends React.Component {
   };
 
   authenticate = (user) => {
-    getChallenges(user._id).then(res => {
+    return getChallenges(user._id).then(res => {
       this.setState({
         user,
         challenges: res.data
@@ -141,7 +141,7 @@ class App extends React.Component {
                 user={this.state.user} 
               />
 
-              <NormalRoute 
+              <ProtectedRoute 
                 exact 
                 path='/courses/create' 
                 user={this.state.user}

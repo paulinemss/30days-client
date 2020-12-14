@@ -15,6 +15,18 @@ export default class index extends Component {
     tab: 0 
   }
 
+  redirect = () => {
+    console.log('redirect is called')
+    if (this.props.location.state?.referrer) {
+      console.log('redirect to location');
+      console.log(this.props.location.state.referrer);
+      this.props.history.push(this.props.location.state.referrer);
+    } else {
+      console.log('redirect to homepage');
+      this.props.history.push("/");
+    }
+  }
+
   handleTabChange = (event, newValue) => {
     this.setState({ tab: newValue })
   }
@@ -33,15 +45,15 @@ export default class index extends Component {
       username: this.state.username,
       password: this.state.password,
     };
-    login(credentials).then((res) => {
+    login(credentials).then(async (res) => {
       if (!res.status) {
         // handle not great request
         console.log('login not successful');
         return;
       }
       localStorage.setItem("accessToken", res.data.accessToken);
-      this.props.authenticate(res.data.user);
-      this.props.history.push("/");
+      await this.props.authenticate(res.data.user);
+      this.redirect();
     });
   };
 
@@ -51,15 +63,15 @@ export default class index extends Component {
       username: this.state.username,
       password: this.state.password,
     };
-    signup(credentials).then((res) => {
+    signup(credentials).then(async (res) => {
       // successful signup
       console.log(res);
       if (!res.status) {
         // unsuccessful signup
       }
       localStorage.setItem("accessToken", res.data.accessToken);
-      this.props.authenticate(res.data.user);
-      this.props.history.push("/");
+      await this.props.authenticate(res.data.user);
+      this.redirect();
     });
   };
 

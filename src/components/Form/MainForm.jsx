@@ -1,6 +1,6 @@
 /* MAIN IMPORTS */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form'; 
 import { useHistory } from 'react-router-dom';
 import { createNewCourse } from '../../services/main';
@@ -48,16 +48,17 @@ const MainForm = (props) => {
     other: getPrimaryColor('other')
   };
 
-  // useEffect(() => {
-  //   if (props.mode === 'edit') {
-  //     setStep1Data({
-  //       title: props.course.title,
-  //       smallDescription: props.course.smallDescription,
-  //       longDescription: props.course.longDescription
-  //     }); 
-  //     setDays(props.course.days); 
-  //   }
-  // }); 
+  useEffect(() => {
+    if (props.mode === 'edit') {
+      console.log(props)
+      setStep1Data({
+        title: props.course.title,
+        smallDescription: props.course.smallDescription,
+        longDescription: props.course.longDescription
+      }); 
+      setDays(props.course.days); 
+    }
+  }, [props]); 
 
   const continueToStep2 = async () => {
     const isValid = await trigger();
@@ -175,6 +176,7 @@ const MainForm = (props) => {
                   error={!!errors.title}
                   helperText={findHelperText('title') ? findHelperText('title') : 'Write your challenge title here.'}
                   defaultValue={step1Data.title}
+                  key={step1Data.title}
                   type='text'
                   inputRef={register({ 
                     required: true,
@@ -192,6 +194,7 @@ const MainForm = (props) => {
                   error={!!errors.smallDescription}
                   helperText={findHelperText('smallDescription')}
                   defaultValue={step1Data.smallDescription}
+                  key={step1Data.smallDescription}
                   type='text'
                   required
                   inputRef={register({
@@ -213,6 +216,7 @@ const MainForm = (props) => {
                   error={!!errors.longDescription}
                   helperText={findHelperText('longDescription')}
                   defaultValue={step1Data.longDescription}
+                  key={step1Data.longDescription}
                   inputRef={register({
                     required: true
                   })}
