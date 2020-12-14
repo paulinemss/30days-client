@@ -14,7 +14,7 @@
 }
 
 .form_step1-left {
-  margin-right: 20px;
+  margin-right: 40px;
 }
 
 .form_steps h2 {
@@ -40,17 +40,23 @@
 
 .other_input {
   flex-grow: 1;
+  width: 100%;
 }
 
 .file {
   display: none;
 }
 
-.file_label {
-  margin-right: 20px;
+.label_file {
+  cursor: pointer;
+  width: 100%;
 }
 
-.file_upload {
+.label_container {
+  pointer-events: none;
+}
+
+.file_upload { 
   background-color: #f7f6f3 !important;
   color: rgba(55, 53, 47, 0.8) !important;
   padding: 5px 15px !important;

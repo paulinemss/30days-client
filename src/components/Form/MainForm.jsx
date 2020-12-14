@@ -8,9 +8,9 @@ import FormDayInput from '../FormDayInput';
 
 /* STYLING IMPORTS */ 
 
-import { Button, TextField, MobileStepper } from '@material-ui/core';
+import { Button, TextField, MobileStepper, InputAdornment } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
-import PublishIcon from '@material-ui/icons/Publish';
+import AttachFileIcon from '@material-ui/icons/AttachFile';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LibraryAddCheckIcon from '@material-ui/icons/LibraryAddCheck';
@@ -30,10 +30,12 @@ const MainForm = (props) => {
   } = useForm({
     mode: 'onChange'
   }); 
+  const { course = { category: 'other' } } = props; 
   const history = useHistory(); 
   const [ step, setStep ] = useState(1); 
   const [ backendErr, setBackendErr ] = useState(''); 
-  const [ step1Data, setStep1Data ] = useState({}); 
+  const [ step1Data, setStep1Data ] = useState(course); 
+  const [ fileName, setFileName ] = useState('');
   const [ days, setDays ] = useState([{
     dayNumber: 1,
     title: '',
@@ -50,12 +52,6 @@ const MainForm = (props) => {
 
   useEffect(() => {
     if (props.mode === 'edit') {
-      console.log(props)
-      setStep1Data({
-        title: props.course.title,
-        smallDescription: props.course.smallDescription,
-        longDescription: props.course.longDescription
-      }); 
       setDays(props.course.days); 
     }
   }, [props]); 
@@ -100,14 +96,17 @@ const MainForm = (props) => {
     return false;
   }
   
-  const addDay = () => {
+  const addDay = (amount) => {
     const daysArray = days.slice();
-    daysArray.push({
-      dayNumber: daysArray.length + 1,
-      title: '',
-      description: '',
-      externalUrl: ''
-    })
+    const start = daysArray.length;
+    for (let i = start; i < Math.min(start + amount, 30); i++) {
+      daysArray.push({
+        dayNumber: i + 1,
+        title: '',
+        description: '',
+        externalUrl: ''
+      })
+    }
     setDays(daysArray);
   }
 
@@ -120,6 +119,10 @@ const MainForm = (props) => {
       }
     })
     setDays(sortedDaysArray); 
+  }
+
+  const handleFileChange = (event) => {
+    setFileName(event.target.files[0].name);
   }
 
   const handleDayChange = (newDay) => {
@@ -154,6 +157,8 @@ const MainForm = (props) => {
       })
   }
 
+  console.log(step1Data.image)
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -176,7 +181,6 @@ const MainForm = (props) => {
                   error={!!errors.title}
                   helperText={findHelperText('title') ? findHelperText('title') : 'Write your challenge title here.'}
                   defaultValue={step1Data.title}
-                  key={step1Data.title}
                   type='text'
                   inputRef={register({ 
                     required: true,
@@ -194,7 +198,6 @@ const MainForm = (props) => {
                   error={!!errors.smallDescription}
                   helperText={findHelperText('smallDescription')}
                   defaultValue={step1Data.smallDescription}
-                  key={step1Data.smallDescription}
                   type='text'
                   required
                   inputRef={register({
@@ -216,7 +219,6 @@ const MainForm = (props) => {
                   error={!!errors.longDescription}
                   helperText={findHelperText('longDescription')}
                   defaultValue={step1Data.longDescription}
-                  key={step1Data.longDescription}
                   inputRef={register({
                     required: true
                   })}
@@ -245,6 +247,7 @@ const MainForm = (props) => {
             <div className='form_step1-right'>
 
               <div className='form_input'>
+
                 <input 
                   className='file'
                   accept='image/*'
@@ -252,18 +255,24 @@ const MainForm = (props) => {
                   multiple
                   id='image'
                   type='file'
+                  onChange={handleFileChange}
                   ref={register}
                 />
-                <label htmlFor='image'>
-                  <span className='file_label'>Course Image *</span>
-                  <Button
-                    component='span'
-                    className='file_upload'
-                    startIcon={<PublishIcon />}
-                  >
-                    Upload
-                  </Button>
+                <label className='label_file' htmlFor='image'>
+                  <div className='label_container'>
+                    <TextField 
+                      className='other_input'
+                      variant='outlined'
+                      label='Upload Course Image'
+                      placeholder='Select an image to upload'
+                      value={fileName}
+                      InputProps={{
+                        startAdornment: <InputAdornment position="start"><AttachFileIcon /></InputAdornment>,
+                      }}
+                    />
+                  </div>
                 </label>
+
               </div>
 
               <div className='form_input form_category'>
@@ -413,7 +422,7 @@ const MainForm = (props) => {
           ))}
 
           {days.length < 30 
-            ? <Button type='button' onClick={addDay}>Add day</Button>
+            ? <Button type='button' onClick={() => addDay(5)}>Add day</Button>
             : <Button type='button' disabled>Add day</Button>
           }
 
