@@ -7,6 +7,10 @@
   justify-content: space-between;
 }
 
+.completed {
+  opacity: 0.7;
+}
+
 .card_main {
   display: flex;
 }

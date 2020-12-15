@@ -49,6 +49,21 @@
   width: 100%;
 }
 
+.edit_course {
+  display: flex;
+  justify-content: center;
+  margin-top: -60px;
+  margin-bottom: 20px;
+}
+
+.edit_course-pic {
+  width: 200px;
+  height: 200px;
+  border: 2px solid #f7f6f3;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
 .file {
   display: none;
 }

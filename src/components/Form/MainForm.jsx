@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form'; 
 import { useHistory } from 'react-router-dom';
-import { createNewCourse } from '../../services/main';
+import { createNewCourse, editCourse } from '../../services/main';
 import FormDayInput from '../FormDayInput';
 
 /* STYLING IMPORTS */ 
@@ -146,18 +146,29 @@ const MainForm = (props) => {
     formBody.append('category', step1Data.category);
     formBody.append('days', JSON.stringify(days));
 
-    createNewCourse(formBody)
-      .then(res => {
-        if (!res.status) {
-          setBackendErr(res.errorMessage)
-        } else {
-          console.log('new course', res.data);
-          history.push(`/courses/${res.data.shortId}`);
-        }
-      })
-  }
+    if (props.mode === 'edit') {
+      editCourse(formBody, props.course.shortId)
+        .then(res => {
+          if (!res.status) {
+            setBackendErr(res.errorMessage)
+          } else {
+            console.log('new course', res.data);
+            history.push(`/courses/${res.data.shortId}`);
+          }
+        })
 
-  console.log(step1Data.image)
+    } else {
+      createNewCourse(formBody)
+        .then(res => {
+          if (!res.status) {
+            setBackendErr(res.errorMessage)
+          } else {
+            console.log('new course', res.data);
+            history.push(`/courses/${res.data.shortId}`);
+          }
+        })
+    }
+  }
 
   return (
     <div>
@@ -213,7 +224,7 @@ const MainForm = (props) => {
                   variant='outlined'
                   label='Long Description'
                   multiline
-                  rows={4}
+                  rows={19}
                   name='longDescription'
                   required
                   error={!!errors.longDescription}
@@ -225,7 +236,7 @@ const MainForm = (props) => {
                 />
               </div>
           
-              <div className='form_input'>
+              {/* <div className='form_input'>
                 <TextField
                   className='other_input'
                   variant='outlined'
@@ -240,11 +251,17 @@ const MainForm = (props) => {
                     required: true
                   })}
                 />
-              </div>
+              </div> */}
 
             </div>
 
             <div className='form_step1-right'>
+              
+              {props.course && 
+                <div className='edit_course'>
+                  <img className='edit_course-pic' src={props.course.image} alt='course pic' />
+                </div>
+              }
 
               <div className='form_input'>
 
@@ -445,7 +462,10 @@ const MainForm = (props) => {
                 type='submit' 
                 disabled={validateThirtyDays()}
               >
-                Create Course
+                {props.mode === 'edit'
+                  ? <span>Edit Course</span>
+                  : <span>Create Course</span>
+                }
                 <LibraryAddCheckIcon />
               </Button>
             }

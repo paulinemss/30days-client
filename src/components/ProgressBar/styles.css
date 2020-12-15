@@ -10,7 +10,7 @@
 .progress_filler {
   height: 100%; 
   border-radius: inherit;
-  text-align: right;
+  text-align: center;
 }
 
 .progress_label {

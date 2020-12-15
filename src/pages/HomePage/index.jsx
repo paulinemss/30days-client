@@ -32,11 +32,18 @@ export default class HomePage extends Component {
               Browse Challenges
             </Button>
           </Link>
-          <Link to='/auth/login' className='homepage_link'>
-            <Button variant='outlined' className='homepage_button'>
-              Signup
-            </Button>
-          </Link>
+          {this.props.user 
+            ? <Link to='/challenges' className='homepage_link'>
+              <Button variant='outlined' className='homepage_button'>
+                Current Challenges
+              </Button>
+            </Link>
+            : <Link to='/auth/login' className='homepage_link'>
+              <Button variant='outlined' className='homepage_button'>
+                Login
+              </Button>
+            </Link>
+          }
         </div>
 
         <div className='homepage_middle'>

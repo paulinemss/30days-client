@@ -1,0 +1,15 @@
+.card_empty {
+  margin-top: 10px;
+  padding: 20px;
+  border-radius: 5px;
+  background: #f7f6f3;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card_empty-link {
+  text-decoration: none;
+  margin-top: 10px;
+}

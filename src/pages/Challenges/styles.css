@@ -1,0 +1,8 @@
+.challenges_title {
+  font-weight: 500;
+}
+
+.challenges_list {
+  max-height: 320px;
+  overflow-y: scroll;
+}

@@ -91,7 +91,7 @@ export default class SingleChallenge extends Component {
     if (challenge.completedDays.length === 0) {
       currentDay = 1;
       challenge.currentDay = currentDay;
-    } else if (currentDay + 1 < 31) {
+    } else if (currentDay + 1 < 30) {
       const sortedArray = challenge.completedDays.slice();
       sortedArray.sort((a, b) => a - b); 
       currentDay = sortedArray[sortedArray.length-1] + 1; 
@@ -141,7 +141,7 @@ export default class SingleChallenge extends Component {
   quitChallenge = () => {
     deleteChallenge(this.state.challenge.shortId).then(() => {
       this.props.updateChallenges();
-      this.props.history.push('/');
+      this.props.history.push('/challenges');
     })
   }
 

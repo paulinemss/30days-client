@@ -32,22 +32,36 @@ class Navbar extends Component {
           <div className='homepage_nav'>
             <img src='/logo.png' alt='30 days logo' />
             <div>
-              <Link className='homepage_nav-link'>
-                <Button 
-                  variant='outlined'
-                  className='homepage_nav-btn'
-                >
-                  Signup
-                </Button>
-              </Link>
-              <Link className='homepage_nav-link'>
-                <Button 
-                  variant='outlined'
-                  className='homepage_nav-btn'
-                >
-                  Login
-                </Button>
-              </Link>
+              {this.props.user 
+                ? (<>
+                  <Link to='/challenges' className='homepage_nav-link'>
+                    <Button 
+                      variant='outlined'
+                      className='homepage_nav-btn'
+                    >
+                      My challenges
+                    </Button>
+                  </Link>
+                </>)
+                : (<> 
+                  <Link to='/auth/login' className='homepage_nav-link'>
+                    <Button 
+                      variant='outlined'
+                      className='homepage_nav-btn'
+                    >
+                      Signup
+                    </Button>
+                  </Link>
+                  <Link to='/auth/login' className='homepage_nav-link'>
+                    <Button 
+                      variant='outlined'
+                      className='homepage_nav-btn'
+                    >
+                      Login
+                    </Button>
+                  </Link>
+                </>)
+              }
             </div>
           </div>
         </>

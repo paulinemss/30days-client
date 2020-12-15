@@ -21,7 +21,9 @@ export default class CourseCard extends Component {
     const { hexColor, rgbColor, icon } = getPrimaryColor(course.category);
 
     return (
-      <div className='card'>
+      <div 
+        className={`card ${this.props.completed ? 'completed' : ''}`}
+      >
         <div 
           className='card_main'
           style={{ borderLeft: `4px solid ${hexColor}` }}
