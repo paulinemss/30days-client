@@ -16,6 +16,16 @@ class Navbar extends Component {
     showNavbar: true
   }
 
+  componentDidMount() {
+    window.onresize = () => {
+      if (window.innerWidth < 970) {
+        this.setState({ showNavbar: false })
+      } else {
+        this.setState({ showNavbar: true })
+      }
+    }
+  }
+
   hideNavbar = () => {
     this.setState({ showNavbar: false })
   }

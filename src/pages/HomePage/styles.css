@@ -21,6 +21,7 @@
   color: rgba(0, 0, 0, 0.6);
   font-weight: 400;
   margin-top: 10px;
+  text-align: center;
 }
 
 .homepage_btns {
@@ -106,6 +107,10 @@
   width: 300px;
 }
 
+.homepage_footer-credits {
+  margin-right: 50px;
+}
+
 .homepage_footer-links {
   display: flex;
   flex-direction: column;
@@ -117,4 +122,49 @@
 
 .homepage_footer-link:hover {
   text-decoration: underline;
+}
+
+@media screen and (max-width: 1120px) {
+  .homepage_middle {
+    width: 100%; 
+  }
+
+  .homepage_footer {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 820px) {
+  .homepage_img {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .homepage_title {
+    font-size: 46px;
+  }
+
+  .homepage_description {
+    flex-direction: column;
+  }
+
+  .homepage_descriptionText {
+    margin-left: 0;
+    margin-top: 40px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .homepage_title {
+    font-size: 30px;
+  }
+
+  .homepage_subtitle {
+    font-size: 16px;
+  }
+  
+  .homepage_description img {
+    width: 280px;
+  }
 }

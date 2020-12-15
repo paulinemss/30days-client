@@ -1,0 +1,39 @@
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+}
+
+.error_img {
+  width: 700px;
+}
+
+.error_msg {
+  text-align: center;
+}
+
+.error_msg h2 {
+  font-weight: 600;
+}
+
+.error_msg p {
+  font-size: 18px;
+}
+
+.error_links {
+  margin-top: 20px;
+}
+
+.error_link {
+  margin-right: 20px !important;
+  text-decoration: none;
+  margin-bottom: 20px !important;
+}
+
+@media only screen and (max-width: 730px) {
+  .error_img {
+    width: 300px;
+  }
+}

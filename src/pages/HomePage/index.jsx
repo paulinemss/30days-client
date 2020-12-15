@@ -114,7 +114,7 @@ export default class HomePage extends Component {
         </div>
 
         <div className='homepage_footer'>
-          <div className='homepage_footer-container'>
+          <div className='homepage_footer-container homepage_footer-credits'>
             <h2>30 days</h2>
             <p>
               Join challenges, hold yourself accountable, and become an overall better person, 30 days at a time.
