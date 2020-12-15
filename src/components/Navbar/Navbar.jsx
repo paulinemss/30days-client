@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import { IconButton, Button } from '@material-ui/core';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
@@ -11,7 +11,7 @@ import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
 import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
 import './Navbar.css';
 
-export default class Navbar extends Component {
+class Navbar extends Component {
   state = {
     showNavbar: true
   }
@@ -25,6 +25,35 @@ export default class Navbar extends Component {
   }
   
   render() {
+
+    if (this.props.location.pathname === '/') {
+      return (
+        <>
+          <div className='homepage_nav'>
+            <img src='/logo.png' alt='30 days logo' />
+            <div>
+              <Link className='homepage_nav-link'>
+                <Button 
+                  variant='outlined'
+                  className='homepage_nav-btn'
+                >
+                  Signup
+                </Button>
+              </Link>
+              <Link className='homepage_nav-link'>
+                <Button 
+                  variant='outlined'
+                  className='homepage_nav-btn'
+                >
+                  Login
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </>
+      )
+    }
+
     return (
       <>
         <nav 
@@ -34,21 +63,12 @@ export default class Navbar extends Component {
 
             <div>
               <div className='nav_logo'>
-                {/* <h2>30 days</h2> */}
                 <img src='/logo.png' alt='30 days logo' />
               </div>
 
               <div className='nav_links'>
                 {this.props.user
                   ? <>
-                    <Link className='nav_link' to='/'>
-                      <Button 
-                        className='nav_button' 
-                        startIcon={<HomeRoundedIcon />}
-                      >
-                          Home
-                      </Button>
-                    </Link>
                     <Link className='nav_link' to='/challenges'>
                       <Button 
                         className='nav_button'
@@ -145,3 +165,5 @@ export default class Navbar extends Component {
     )
   }
 }
+
+export default withRouter(Navbar);

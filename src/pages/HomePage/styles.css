@@ -1,0 +1,120 @@
+.homepage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -80px;
+}
+
+.homepage_img {
+  width: 600px;
+  margin-top: -50px;
+}
+
+.homepage_title {
+  font-size: 56px;
+  text-align: center;
+  margin-top: -40px;
+}
+
+.homepage_subtitle {
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 400;
+  margin-top: 10px;
+}
+
+.homepage_btns {
+  margin-top: 30px;
+}
+
+.homepage_link {
+  text-decoration: none !important;
+}
+
+.homepage_button {
+  margin-right: 40px !important;
+}
+
+.homepage_middle {
+  margin-top: 40px;
+  width: 1100px;
+  padding: 20px;
+  background-color: #f7f6f3;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+}
+
+.homepage_allTabs {
+  display: flex; 
+  align-self: center;
+}
+
+.homepage_tab {
+  margin-right: 20px;
+}
+
+.selected {
+  border-bottom: 2px solid #161616 !important;
+}
+
+.tab_button {
+  text-transform: none !important;
+  font-weight: 500 !important;
+}
+
+.homepage_description {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.homepage_description img {
+  width: 380px;
+}
+
+.homepage_descriptionText {
+  width: 300px;
+  margin-left: 40px;
+}
+
+.homepage_footer {
+  width: 1100px;
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+.homepage_footer-container h2 {
+  margin-bottom: 15px;
+}
+
+.homepage_footer-container p {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 15px;
+}
+
+.homepage_footer-container a {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.homepage_footer-container {
+  font-size: 12px !important;
+  width: 300px;
+}
+
+.homepage_footer-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.homepage_footer-link {
+  text-decoration: none;
+}
+
+.homepage_footer-link:hover {
+  text-decoration: underline;
+}

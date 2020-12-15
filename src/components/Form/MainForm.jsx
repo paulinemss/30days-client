@@ -410,6 +410,7 @@ const MainForm = (props) => {
         <div className='form_steps form_step2'>
 
           <h2>STEP TWO - Daily Challenges</h2>
+          <p className='form_subtitle'>Each day must have a title and a description. Be concise and to the point - you can always edit the course later.</p>
 
           {days.map(day => (
             <FormDayInput 

@@ -23,7 +23,7 @@ export default class index extends Component {
       this.props.history.push(this.props.location.state.referrer);
     } else {
       console.log('redirect to homepage');
-      this.props.history.push("/");
+      this.props.history.push("/challenges");
     }
   }
 

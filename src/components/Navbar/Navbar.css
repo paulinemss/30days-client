@@ -1,3 +1,28 @@
+/* HOMEPAGE NAVBAR */
+
+.homepage_nav {
+  width: 100%; 
+  z-index: 1;
+  padding: 20px 20px 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.homepage_nav img {
+  width: 80px;
+}
+
+.homepage_nav-link {
+  text-decoration: none;
+}
+
+.homepage_nav-btn {
+  margin-left: 20px !important;
+}
+
+/* MAIN NAVBAR */
+
 nav {
   background-color: #f7f6f3;
   width: 280px;

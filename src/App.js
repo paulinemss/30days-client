@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch } from "react-router-dom";
+import { Switch, withRouter } from "react-router-dom";
 import LoadingComponent from "./components/Loading";
 import Navbar from "./components/Navbar/Navbar";
 import HomePage from "./pages/HomePage";
@@ -96,6 +96,7 @@ class App extends React.Component {
             console.log("SOMETHING HAPPENED", res);
           }
           localStorage.removeItem("accessToken");
+          this.props.history.push('/');
           return this.setState({
             isLoading: false,
             user: null,
@@ -119,18 +120,31 @@ class App extends React.Component {
       return <LoadingComponent />;
     }
 
+    console.log('app props', this.props);
+
     return (
       <>
-        <div className="App">
+        <div 
+          className={this.props.location.pathname === '/'
+            ? 'App-column'
+            : 'App-flex'
+          }
+        >
           <Navbar handleLogout={this.handleLogout} user={this.state.user} />
 
-          <div className="Wrapper">
+          <div
+            className={this.props.location.pathname === '/'
+              ? 'Wrapper-column'
+              : 'Wrapper-flex'
+            }
+          >
 
             <Switch>
 
               <NormalRoute 
                 exact 
                 path={PATHS.HOMEPAGE} 
+                user={this.state.user}
                 component={HomePage} 
               />
 
@@ -215,4 +229,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(App);

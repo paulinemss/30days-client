@@ -15,13 +15,24 @@ h1 {
   font-weight: 600;
 }
 
-.App {
+.App-flex {
   display: flex;
 }
 
-.Wrapper {
+.App-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.Wrapper-flex {
   padding: 20px 40px;
   width: 100%;
   height: 100vh;
   overflow-y: scroll;
+}
+
+.Wrapper-column {
+  padding: 20px 40px;
+  width: 100%;
+  height: 100vh;
 }

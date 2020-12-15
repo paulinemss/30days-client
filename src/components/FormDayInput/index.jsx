@@ -50,6 +50,7 @@ export default class index extends Component {
               label='Title'
               type='text'
               name='title'
+              required
               id='dayTitle'
               value={this.state.day.title}
               onChange={this.handleChange}
@@ -74,6 +75,7 @@ export default class index extends Component {
             multiline
             rows={2}
             type='text'
+            required
             name='description'
             id='dayDescription'
             value={this.state.day.description}
