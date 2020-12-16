@@ -3,9 +3,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getOneCourse, startChallenge } from '../../services/main';
 import Loading from '../../components/Loading';
+import { getPrimaryColor } from '../../utils/helpers';
 
 /* Styles imports */
-import { Button } from '@material-ui/core';
+import { Button, Divider } from '@material-ui/core';
 import './style.css';
 
 /* Component */ 
@@ -14,14 +15,16 @@ export default class SingleCourse extends Component {
     course: {},
     selectedDay: 1,
     currentDetail: '',
-    loading: true
+    loading: true,
+    colors: {}
   }
 
   componentDidMount() {
     getOneCourse(this.props.match.params.id).then(res => {
       this.setState({ 
         course: res.data,
-        loading: false
+        loading: false,
+        colors: getPrimaryColor(res.data.category)
       })
     })
   }
@@ -51,10 +54,8 @@ export default class SingleCourse extends Component {
     }
   }
 
-  showDayDetails = (num) => {
-    this.setState({
-      currentDetail: this.state.course.days[num - 1].description
-    })
+  selectDay = (dayNumber) => {
+    this.setState({ selectedDay: dayNumber })
   }
 
   isUserTheAuthor = () => {
@@ -76,90 +77,135 @@ export default class SingleCourse extends Component {
     }
 
     const dailyChallenge = days[this.state.selectedDay - 1]
+    console.log(dailyChallenge);
 
     return (
-      <div className='single'>
+      <div className='course'>
 
-        <div className='single_side single_left'>
-          <div className='single_title'>
-            <h1>30 days of... {title}</h1>
-            <h2>{smallDescription}</h2>
-          </div>
-
-          <div className='single_media'>
-            <img src={image} alt='' />
+        <div className='course_header'>
+          <div className='course_title'>
+            <div 
+              className='course_icon'
+              style={{ 
+                backgroundColor: this.state.colors.rgbColor, 
+                color: this.state.colors.hexColor
+              }}
+            >
+              {this.state.colors.icon}
+            </div>
             <div>
-              <h1>Day {this.state.selectedDay}</h1>
-              <h4>30 days of {title}</h4>
+              <h1>30 days of... {title}</h1>
+              <h2>{smallDescription}</h2>
             </div>
           </div>
 
-          <div className='single_details'>
-            <div className='single_details-top'>
-              <div>
-                <p>Day {this.state.selectedDay} Challenge</p>
-                <h3>{dailyChallenge.title}</h3>
-              </div>
-            </div>
-            <div className='single_details-bottom'>
-              <p>{dailyChallenge.description}</p>
-              {dailyChallenge.externalUrl && 
-                <Button>
-                  <a
-                    href={dailyChallenge.externalUrl}
-                    target='_blank'
-                    rel='noreferrer'
-                  >External link</a>
-                </Button>
-              }
-            </div>
-          </div>
-        </div>
-
-        <div className='single_side single_right'>
-          <div className='single_right-top'>
-            <h3>About this course</h3>
-            <p>{longDescription}</p>
-            
-          </div>
-
-          <div className='single_calendar'>
-            <div className='single_calendar-title'>
-              <p>30 days of {title}</p>
-            </div>
-            <div className='single_numbers'>
-              {days.map(day => (
-                <button
-                  className={`
-                    single_calendar-num
-                    ${this.state.selectedDay === day.dayNumber ? 'active' : ''}
-                  `}
-                  key={day._id}
-                >
-                  {day.dayNumber}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className='single_streak'>
+          <div className='course_btns'>
             <Button
               variant='outlined'
-              color='primary'
+              style={{ 
+                color: this.state.colors.hexColor, 
+                border: `1px solid ${this.state.colors.hexColor}` 
+              }}
               onClick={this.beginChallenge}
+              className='course_btn'
             >
               Start 30 days challenge
             </Button>
 
-            {this.isUserTheAuthor() && <Button>
-              <Link to={`/courses/edit/${this.state.course.shortId}`}>
-                Edit Course
-              </Link>
-            </Button>}
+            {this.isUserTheAuthor() && 
+              <>
+                <Button className='course_btn'>
+                  <Link 
+                    to={`/courses/edit/${this.state.course.shortId}`}
+                    className='course_link'
+                  >
+                  Edit Course
+                  </Link>
+                </Button>
+                <Button className='course_btn'>
+                  <Link 
+                    to={`/courses/edit/${this.state.course.shortId}`}
+                    className='course_link'
+                  >
+                  Delete Course
+                  </Link>
+                </Button>
+              </>
+            }
+          </div>
+        </div>
+
+        <Divider />
+
+        <div className='course_main'>
+
+          <div className='course_main-side'>
+            <div className='course_image'>
+              <img src={image} alt='course pic' />
+            </div>
+            <h2>Description</h2>
+            <p>{longDescription}</p>
+          </div>
+
+          <div className='course_main-side'>
+          
+            <div className='course_peak'>
+              <h2>Sneak Peek</h2>
+
+              <div className='course_peak-container'>
+                <Button 
+                  className='course_peak-day'
+                  style={{ 
+                    color: this.state.colors.hexColor,
+                    border: this.state.selectedDay === 1 ? `1px solid ${this.state.colors.hexColor}` : '1px solid #f7f6f3'
+                  }}
+                  onClick={() => this.selectDay(1)}
+                >
+                  Day 1
+                </Button>
+                <Button 
+                  className='course_peak-day'
+                  style={{ 
+                    color: this.state.colors.hexColor,
+                    border: this.state.selectedDay === 2 ? `1px solid ${this.state.colors.hexColor}` : '1px solid #f7f6f3'
+                  }}
+                  onClick={() => this.selectDay(2)}
+                >
+                  Day 2
+                </Button>
+                <Button 
+                  className='course_peak-day'
+                  style={{ 
+                    color: this.state.colors.hexColor,
+                    border: this.state.selectedDay === 3 ? `1px solid ${this.state.colors.hexColor}` : '1px solid #f7f6f3'
+                  }}
+                  onClick={() => this.selectDay(3)}
+                >
+                  Day 3
+                </Button>
+                <Button 
+                  className='course_peak-day'
+                  style={{ 
+                    color: this.state.colors.hexColor,
+                    border: this.state.selectedDay === 4 ? `1px solid ${this.state.colors.hexColor}` : '1px solid #f7f6f3'
+                  }}
+                  onClick={() => this.selectDay(4)}
+                >
+                  Day 4
+                </Button>
+              </div>
+
+              <div className='course_peak-details'>
+                <h3>DAY {this.state.selectedDay} CHALLENGE</h3>
+                <h2>{dailyChallenge.title}</h2>
+                <p>{dailyChallenge.description}</p>
+              </div>
+            </div>
+
           </div>
 
         </div>
-
+        
       </div>
     )
   }

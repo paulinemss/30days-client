@@ -355,20 +355,21 @@ export default class SingleChallenge extends Component {
               <div className='single_details-top'>
                 <div>
                   <p>Today's challenge</p>
-                  <h3>
+                  <h1>
                     {this.state.challenge.course.days[this.state.selectedDay - 1].title}
-                  </h3>
+                  </h1>
                 </div>
               </div>
 
               <div className='single_details-bottom'>
                 <p>{this.state.challenge.course.days[this.state.selectedDay - 1].description}</p>
 
-                {this.state.challenge.course.days[this.state.selectedDay - 1].externalUrl && <Button>
+                {this.state.challenge.course.days[this.state.selectedDay - 1].externalUrl && <Button variant='outlined'>
                   <a 
                     href={this.state.challenge.course.days[this.state.selectedDay - 1].externalUrl}
                     target='_blank'
                     rel='noreferrer'
+                    className='external_link'
                   > 
                   External link
                   </a>
@@ -424,7 +425,7 @@ export default class SingleChallenge extends Component {
             </div>
             <div className='single_streak'>
               <h1>{this.state.streak}</h1>
-              <p>Your current streak</p>
+              <p>Current streak</p>
             </div>
           </div>
         </div>

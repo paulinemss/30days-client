@@ -60,15 +60,25 @@
   justify-content: space-between;
 }
 
-.single_details-top h3 {
+.single_details-top h1 {
   font-size: 28px;
   margin-bottom: 14px;
   line-height: 1;
 }
 
+.single_details-bottom p {
+  margin-bottom: 20px;
+}
+
+.external_link {
+  text-decoration: none;
+  color: #161616;
+}
+
 .single_right {
   margin-left: 40px;
   width: 400px;
+  align-items: center;
 }
 
 .single_right-top {
@@ -133,10 +143,18 @@
 }
 
 .single_streak {
-  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  border-radius: 50% 50% 60% 30% / 60% 60% 40% 40%;
+  background-color: #f7f6f3;
+  width: 200px;
+  height: 150px;
+}
+
+.single_streak p {
+  margin-bottom: 10px;
 }
 
 .challenge_progress {
@@ -158,6 +176,108 @@
   display: flex;
   align-items: center;
   margin-bottom: 40px;
+}
+
+.course h1 {
+  font-weight: 600;
+}
+
+.course h2 {
+  font-weight: 400;
+}
+
+.course_title {
+  display: flex;
+  align-items: center;
+}
+
+.course_icon {
+  padding: 10px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.course_header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+}
+
+.course_btns {
+  align-self: flex-end;
+}
+
+.course_btn {
+  margin-left: 20px !important;
+}
+
+.course_link {
+  text-decoration: none;
+  color: #161616;
+}
+
+.course_main {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.course_main-side {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+}
+
+.course_image img {
+  width: 100%; 
+  margin-bottom: 20px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.course_main h2 {
+  margin-bottom: 20px;
+}
+
+.course_peak-container {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  height: 90px;
+}
+
+.course_peak-day {
+  height: 100px;
+  background-color: #f7f6f3 !important;
+  width: 100px !important;
+  border-radius: 10px !important;
+  box-shadow: 5px 5px 10px 0.6px rgba(0, 0, 0, 0.06);
+}
+
+.course_peak-details {
+  margin-top: 80px;
+  background-color: #f7f6f3;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.course_peak-details h3 {
+  font-weight: 600;
+}
+
+.course_peak-details h2 {
+  font-size: 20px;
+}
+
+.course_category {
+  margin-top: 20px;
 }
 
 @media only screen and (max-width: 1450px) {
