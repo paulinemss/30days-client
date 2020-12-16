@@ -9,5 +9,24 @@
   border: none;
   padding: 20px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+}
+
+.modal_top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal_txt {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal_txt h2 { 
+  margin-bottom: 10px;
+}
+
+.modal_txt p {
+  margin-bottom: 10px;
 }

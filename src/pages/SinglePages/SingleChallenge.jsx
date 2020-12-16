@@ -9,6 +9,7 @@ import {
 import Loading from '../../components/Loading';
 import QuitChallengeModal from '../../components/QuitChallengeModal';
 import { getPrimaryColor } from '../../utils/helpers';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 /* Styles imports */
 import { 
@@ -20,7 +21,14 @@ import {
   Divider
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
+import AssignmentReturnedIcon from '@material-ui/icons/AssignmentReturned';
 import tinycolor from 'tinycolor2';
+import { 
+  CircularProgressbarWithChildren, 
+  buildStyles 
+} from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 import './style.css';
 
 /* Component */ 
@@ -34,7 +42,8 @@ export default class SingleChallenge extends Component {
     switch: false,
     loading: true,
     modalOpen: false,
-    colors: {}
+    colors: {},
+    copied: false
   }
 
   componentDidMount() {
@@ -161,6 +170,18 @@ export default class SingleChallenge extends Component {
 
   }
 
+  copyLink = () => {
+    this.setState({ copied: true })
+    setTimeout(() => {
+      this.setState({ copied: false })
+    }, 2000);
+  }
+
+  getPercentageCompleted = () => {
+    const daysCompleted = this.state.challenge.completedDays.length; 
+    return Math.round((daysCompleted / 30) * 100); 
+  }
+
   render() {
     if (this.state.loading) {
       return <Loading />
@@ -185,23 +206,27 @@ export default class SingleChallenge extends Component {
         <div className='header'>
           <div className='single_title'>
 
-            {this.isUserTheOwner()
-              ? <>
-                <h1>
-                  {this.state.greeting}, {this.props.user.username}
-                </h1>
-                <h2>How do you feel today?</h2>
-              </>
-              : <>
-                <h1>
-                  {this.state.challenge.owner.username}'s challenge
-                </h1>
-                <h2>30 days of {this.state.challenge.course.title}</h2>
-              </>
-            }
+            <h1>
+              {this.isUserTheOwner()
+                ? <span>{this.state.greeting}, {this.props.user.username}</span>
+                : <span>{this.state.challenge.owner.username}'s challenge</span>
+              }
+            </h1>
+            
+            <div className='single_subtitle'>
+              <div
+                className='single_icon'
+                style={{ backgroundColor: this.state.colors.rgbColor }}
+              >
+                {this.state.colors.icon}
+              </div>
+              <h2>30 days of {this.state.challenge.course.title}</h2>
+            </div>
 
           </div>
+          
           <div className='single_right-top'>
+
             <div className='single_challenges-btns'>
               {this.isUserTheOwner() 
                 ? <>
@@ -211,12 +236,54 @@ export default class SingleChallenge extends Component {
                   <Button className='top-btns' onClick={this.handleOpenModal}>
                     Quit Challenge
                   </Button>
+                  <Button className='top-btns'>
+                    Share
+                    <ColorfulSwitch
+                      thumbSwitchedStyle={{ backgroundColor: 'grey' }}
+                      checked={this.state.switch}
+                      onChange={this.handleSwitch}
+                      name='switch'
+                    />
+                  </Button>
                 </>
                 : <>
                   <Button className='top-btns' onClick={this.joinChallenge}>
                     Join Challenge
                   </Button>
+                  <Button className='top-btns'>
+                    Public Challenge
+                    <ColorfulSwitch
+                      thumbSwitchedStyle={{ backgroundColor: 'grey' }}
+                      checked={this.state.switch}
+                      name='switch'
+                    />
+                  </Button>
                 </>
+              }
+              {this.isUserTheOwner() && this.state.switch &&
+              <Button 
+                className='top-btns'
+                onClick={this.copyToClipboard}
+              > 
+                <CopyToClipboard
+                  text={window.location.href}
+                  onCopy={this.copyLink}
+                >
+                  <span className='copy-btn'>
+                    copy shareable link
+                    {this.state.copied 
+                      ? <AssignmentTurnedInIcon 
+                        className='challenge_icon' 
+                        style={{ color: this.state.colors.hexColor }}
+                      />
+                      : <AssignmentReturnedIcon 
+                        className='challenge_icon' 
+                        style={{ color: this.state.colors.hexColor }}
+                      />
+                    }
+                  </span>
+                </CopyToClipboard>
+              </Button>
               }
             </div>
 
@@ -228,36 +295,10 @@ export default class SingleChallenge extends Component {
                 <QuitChallengeModal 
                   quitChallenge={this.quitChallenge}
                   handleCloseModal={this.handleCloseModal}
+                  colors={this.state.colors}
                 />
               </div>
             </Modal>
-
-            <div 
-              className='single_share'
-              style={{ 
-                backgroundColor: this.state.colors.rgbColor,
-                color: this.state.colors.hexColor
-              }}
-            >
-              {this.isUserTheOwner()
-                ? <>
-                  <ColorfulSwitch
-                    thumbSwitchedStyle={{ backgroundColor: 'grey' }}
-                    checked={this.state.switch}
-                    onChange={this.handleSwitch}
-                    name='switch'
-                  />
-                  <p>Share your progress</p>
-                </>
-                : <>
-                  <ColorfulSwitch
-                    checked={this.state.switch}
-                    name='switch'
-                  />
-                  <p>This challenge is public</p>
-                </>
-              }
-            </div>
 
           </div>
         </div>
@@ -269,8 +310,19 @@ export default class SingleChallenge extends Component {
             <div className='single_media'>
               <img src={this.state.challenge.course.image} alt='' />
               <div>
-                <h1>Day {this.state.selectedDay}</h1>
-                <h4>30 days of {this.state.challenge.course.title}</h4>
+
+                <div className='challenge_progress'>
+                  <CircularProgressbarWithChildren 
+                    value={this.getPercentageCompleted()} 
+                    strokeWidth={6}
+                    styles={buildStyles({
+                      trailColor: '#f7f6f3',
+                      pathColor: this.state.colors.hexColor
+                    })}
+                  >
+                    <h1>DAY {this.state.selectedDay}</h1>
+                  </CircularProgressbarWithChildren>
+                </div>
 
                 <div className='single_checkbox-div'>
                   {this.isUserTheOwner()

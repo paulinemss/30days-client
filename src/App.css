@@ -25,7 +25,7 @@ h1 {
 }
 
 .Wrapper-flex {
-  padding: 20px 40px;
+  padding: 20px 40px 20px 40px;
   width: 100%;
   height: 100vh;
   overflow-y: scroll;
@@ -35,4 +35,23 @@ h1 {
   padding: 20px 40px;
   width: 100%;
   height: 100vh;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #B8B7B4; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #787775; 
 }

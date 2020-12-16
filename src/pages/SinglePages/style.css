@@ -34,6 +34,7 @@
   display: flex;
   align-items: center;
   text-align: center;
+  justify-content: center;
   margin-bottom: 40px;
 }
 
@@ -77,15 +78,8 @@
   align-self: flex-end;
 }
 
-.single_share {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-self: center;
-  border-radius: 5px; 
-  width: 130px;
-  height: 100px;
-  text-align: center;
+.challenge_icon {
+  margin-left: 10px;
 }
 
 .single_challenges-btns {
@@ -96,7 +90,11 @@
 .top-btns {
   height: 30px !important;
   align-self: flex-end;
-  margin-right: 20px !important;
+  margin-left: 20px !important;
+}
+
+.copy-btn {
+  display: flex;
 }
 
 .single_numbers {
@@ -139,4 +137,48 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.challenge_progress {
+   width: 200px;
+}
+
+.single_icon {
+  padding: 10px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.single_subtitle {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+@media only screen and (max-width: 1450px) {
+  .header {
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 1400px) {
+  .content {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media only screen and (max-width: 1075px) {
+  .single_challenges-btns {
+    flex-direction: column;
+  }
+
+  .top-btns {
+    margin-bottom: 10px !important;
+  }
 }
