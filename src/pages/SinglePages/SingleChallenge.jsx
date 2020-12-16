@@ -1,5 +1,7 @@
 /* Main imports */ 
 import React, { Component } from 'react';
+import { Transition } from 'react-transition-group';
+import AnimatedNumber from "animated-number-react";
 import { 
   getOneChallenge, 
   updateChallenge, 
@@ -32,9 +34,27 @@ import {
 import 'react-circular-progressbar/dist/styles.css';
 import './style.css';
 
+// Animation
+const duration = 300;
+
+const defaultStyle = {
+  transition: `all ${duration}ms ease-in-out`,
+  opacity: 0,
+}
+
+const transitionStyles = {
+  entering: { opacity: 1 },
+  entered:  { opacity: 1 },
+  exiting:  { opacity: 0 },
+  exited:  { opacity: 0, transform: 'translateY(10px)' },
+};
+
+const formatValue = (value) => value.toFixed(0);
+
 /* Component */ 
 export default class SingleChallenge extends Component {
   state = {
+    isVisible: true,
     challenge: {},
     greeting: '',
     selectedDay: 1,
@@ -48,6 +68,16 @@ export default class SingleChallenge extends Component {
   }
 
   componentDidMount() {
+    this.fetchData();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.id !== prevProps.match.params.id) {
+      this.fetchData(); 
+    }
+  }
+
+  fetchData = () => {
     getOneChallenge(this.props.match.params.id)
       .then(res => {
         if (res.status) {
@@ -136,8 +166,14 @@ export default class SingleChallenge extends Component {
 
   selectDay = (dayNumber) => { 
     this.setState({
-      selectedDay: dayNumber
+      isVisible: false
     })
+    setTimeout(() => {
+      this.setState({
+        selectedDay: dayNumber,
+        isVisible: true
+      })
+    }, duration);
   }
 
   handleOpenModal = () => {
@@ -345,7 +381,14 @@ export default class SingleChallenge extends Component {
                       pathColor: this.state.colors.hexColor
                     })}
                   >
-                    <h1>DAY {this.state.selectedDay}</h1>
+                    <h1>
+                      DAY&nbsp;
+                      <AnimatedNumber
+                        duration={300}
+                        value={this.state.selectedDay}
+                        formatValue={formatValue}
+                      />
+                    </h1>
                   </CircularProgressbarWithChildren>
                 </div>
 
@@ -375,32 +418,41 @@ export default class SingleChallenge extends Component {
 
               </div>
             </div>
+            
+            <Transition in={this.state.isVisible} timeout={0}>
+              {state => (
+                <div
+                  className='single_details'
+                  style={{
+                    ...defaultStyle,
+                    ...transitionStyles[state]
+                  }}>
+                  <div className='single_details-top'>
+                    <div>
+                      <p>Today's challenge</p>
+                      <h1>
+                        {this.state.challenge.course.days[this.state.selectedDay - 1].title}
+                      </h1>
+                    </div>
+                  </div>
 
-            <div className='single_details'>
-              <div className='single_details-top'>
-                <div>
-                  <p>Today's challenge</p>
-                  <h1>
-                    {this.state.challenge.course.days[this.state.selectedDay - 1].title}
-                  </h1>
-                </div>
-              </div>
+                  <div className='single_details-bottom'>
+                    <p>{this.state.challenge.course.days[this.state.selectedDay - 1].description}</p>
 
-              <div className='single_details-bottom'>
-                <p>{this.state.challenge.course.days[this.state.selectedDay - 1].description}</p>
-
-                {this.state.challenge.course.days[this.state.selectedDay - 1].externalUrl && <Button variant='outlined'>
-                  <a 
-                    href={this.state.challenge.course.days[this.state.selectedDay - 1].externalUrl}
-                    target='_blank'
-                    rel='noreferrer'
-                    className='external_link'
-                  > 
+                    {this.state.challenge.course.days[this.state.selectedDay - 1].externalUrl && <Button variant='outlined'>
+                      <a 
+                        href={this.state.challenge.course.days[this.state.selectedDay - 1].externalUrl}
+                        target='_blank'
+                        rel='noreferrer'
+                        className='external_link'
+                      > 
                   External link
-                  </a>
-                </Button>}
-              </div>
-            </div>
+                      </a>
+                    </Button>}
+                  </div>
+                </div>
+              )}
+            </Transition>
 
           </div>
 

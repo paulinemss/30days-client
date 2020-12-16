@@ -76,6 +76,7 @@ export default class Courses extends Component {
                 ? 'sort-button active'
                 : 'sort-button'
               }
+              variant={this.state.selected === 'all' ? 'outlined' : ''}
               onClick={() => this.sortCourses('all')}
             >
               All
@@ -89,6 +90,7 @@ export default class Courses extends Component {
                 ? 'sort-button active'
                 : 'sort-button'
               }
+              variant={this.state.selected === 'mindfulness' ? 'outlined' : ''}
               onClick={() => this.sortCourses('mindfulness')}
             >
               Mindfulness
@@ -102,6 +104,7 @@ export default class Courses extends Component {
                 ? 'sort-button active'
                 : 'sort-button'
               }
+              variant={this.state.selected === 'exercise' ? 'outlined' : ''}
               onClick={() => this.sortCourses('exercise')}
             >
               Exercise
@@ -115,6 +118,7 @@ export default class Courses extends Component {
                 ? 'sort-button active'
                 : 'sort-button'
               }
+              variant={this.state.selected === 'tech' ? 'outlined' : ''}
               onClick={() => this.sortCourses('tech')}
             >
               Tech
@@ -128,6 +132,7 @@ export default class Courses extends Component {
                 ? 'sort-button active'
                 : 'sort-button'
               }
+              variant={this.state.selected === 'arts' ? 'outlined' : ''}
               onClick={() => this.sortCourses('arts')}
             >
               Arts & Crafts
@@ -141,6 +146,7 @@ export default class Courses extends Component {
                 ? 'sort-button active'
                 : 'sort-button'
               }
+              variant={this.state.selected === 'other' ? 'outlined' : ''}
               onClick={() => this.sortCourses('other')}
             >
               Other

@@ -70,6 +70,7 @@
   align-items: center;
   margin-top: 40px;
   margin-bottom: 20px;
+  min-height: 250px;
 }
 
 .homepage_description img {

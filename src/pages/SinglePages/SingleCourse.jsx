@@ -1,6 +1,7 @@
 /* Main imports */ 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown'
 import { getOneCourse, startChallenge } from '../../services/main';
 import Loading from '../../components/Loading';
 import { getPrimaryColor } from '../../utils/helpers';
@@ -144,7 +145,7 @@ export default class SingleCourse extends Component {
               <img src={image} alt='course pic' />
             </div>
             <h2>Description</h2>
-            <p>{longDescription}</p>
+            <div><ReactMarkdown>{longDescription}</ReactMarkdown></div>
           </div>
 
           <div className='course_main-side'>
@@ -205,7 +206,7 @@ export default class SingleCourse extends Component {
           </div>
 
         </div>
-        
+
       </div>
     )
   }
