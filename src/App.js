@@ -192,6 +192,7 @@ class App extends React.Component {
                 path='/challenges/page/:id' 
                 component={SingleChallenge} 
                 user={this.state.user}
+                addChallenge={this.addChallenge}
                 challenges={this.state.challenges}
                 updateChallenges={this.updateChallenges}
               />

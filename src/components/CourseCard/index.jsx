@@ -5,6 +5,7 @@ import ThumbUpAltRoundedIcon from '@material-ui/icons/ThumbUpAltRounded';
 import NavigateNextRoundedIcon from '@material-ui/icons/NavigateNextRounded';
 import ProgressBar from '../../components/ProgressBar';
 import { getPrimaryColor } from '../../utils/helpers';
+import Loading from '../../components/Loading';
 import './styles.css'; 
 
 export default class CourseCard extends Component {
@@ -17,6 +18,10 @@ export default class CourseCard extends Component {
       upvoteCourse,
       percentageCompleted
     } = this.props;
+
+    if (!course) {
+      return <Loading />
+    }
 
     const { hexColor, rgbColor, icon } = getPrimaryColor(course.category);
 

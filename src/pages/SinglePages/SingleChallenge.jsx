@@ -4,7 +4,8 @@ import {
   getOneChallenge, 
   updateChallenge, 
   deleteChallenge, 
-  restartChallenge
+  restartChallenge,
+  startChallenge
 } from '../../services/main';
 import Loading from '../../components/Loading';
 import QuitChallengeModal from '../../components/QuitChallengeModal';
@@ -167,7 +168,29 @@ export default class SingleChallenge extends Component {
   }
 
   joinChallenge = () => {
+    if (this.props.user) {
+      startChallenge(this.state.challenge.course, this.props.user._id)
+        .then(res => {
+          const challenge = res.data;
+          console.log('challenge data', res.data);
 
+          if (!this.props.challenges.includes(challenge)) {
+            this.props.addChallenge(challenge);
+          } 
+
+          this.props.updateChallenges()
+          this.props.history.push(
+            `/challenges/page/${challenge.shortId}`
+          );
+        })
+        .catch(err => {
+          console.log('err', err);
+        })
+    } else {
+      this.props.history.push('/auth/login', {
+        referrer: this.props.history.location.pathname
+      }); 
+    }
   }
 
   copyLink = () => {
@@ -186,6 +209,8 @@ export default class SingleChallenge extends Component {
     if (this.state.loading) {
       return <Loading />
     }
+
+    console.log(this.state.challenge.course)
     
     const ColorfulSwitch = withStyles({
       switchBase: {
