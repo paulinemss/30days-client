@@ -12,13 +12,13 @@
 .create_course {
   text-decoration: none;
   color: #161616;
+  width: 170px;
 }
 
 .sort-button {
   margin-right: 20px !important;
 }
 
-/* 
-.active {
-  text-decoration: underline !important;
-} */
+@media screen and (max-width: 1120px) {
+
+}

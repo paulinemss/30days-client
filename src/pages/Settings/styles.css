@@ -1,0 +1,30 @@
+.settings {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.settings h2 {
+  font-weight: 500;
+  margin-bottom: 20px;
+  align-self: flex-start;
+}
+
+.settings_username {
+  width: 300px;
+  margin-right: 10px !important;
+  margin-bottom: 20px !important;
+}
+
+.settings_btn {
+  width: 300px;
+  margin-bottom: 20px !important;
+}
+
+.check_green {
+  color: green !important;
+}
+
+.check_red {
+  color: red !important;
+}

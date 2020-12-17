@@ -159,13 +159,41 @@
 @media screen and (max-width: 470px) {
   .homepage_title {
     font-size: 30px;
+    margin-top: 5px;
   }
 
   .homepage_subtitle {
     font-size: 16px;
   }
+
+  .homepage_img {
+    margin-top: 50px;
+  }
   
   .homepage_description img {
-    width: 280px;
+    width: 250px;
+  }
+
+  .homepage_button {
+    margin-bottom: 20px !important;
+  }
+
+  .homepage_btns {
+    margin-bottom: -30px;
+  }
+
+  .homepage_allTabs {
+    flex-direction: column
+  }
+
+  .homepage_tab {
+    margin-right: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .homepage_descriptionText {
+    font-size: 14px;
+    width: 240px;
   }
 }
