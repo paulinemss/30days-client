@@ -14,4 +14,4 @@ All-in-one application that inspires you to join 30 days challenges, share your 
 
 ### Portfolio Project
 
-30 days is a full stack web application built and designed by [Pauline Massé](https://github.com/paulinemss) with the MERN stack (MongoDB, Express, React, Node.js). 
+30 days is a full stack web application built and designed by [Pauline Massé](https://github.com/paulinemss) with the MERN stack (MongoDB, Express, React, Node.js). You can find the frontend files in this repository, and the backend files [here](https://thirtydays.netlify.app/). 
