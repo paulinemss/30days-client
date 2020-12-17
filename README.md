@@ -1,5 +1,5 @@
 <a href="https://thirtydays.netlify.app/">
-  <img height="100" src="/public/images/favicon.png">
+  <img height="100" src="/public/favicon.png">
 </a>
 
 # 30 days
