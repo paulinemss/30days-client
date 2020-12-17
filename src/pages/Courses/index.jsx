@@ -66,7 +66,7 @@ export default class Courses extends Component {
 
         <PageTitle 
           mode='courses'
-          title='Browse Courses'
+          title='Browse Challenges'
         />
 
         <div className='courses_btns'>
