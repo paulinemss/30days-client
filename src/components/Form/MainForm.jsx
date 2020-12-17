@@ -224,11 +224,11 @@ const MainForm = (props) => {
                   variant='outlined'
                   label='Long Description'
                   multiline
-                  rows={19}
+                  rows={15}
                   name='longDescription'
                   required
                   error={!!errors.longDescription}
-                  helperText={findHelperText('longDescription')}
+                  helperText={findHelperText('longDescription') ? findHelperText('longDescription') : 'This text field supports Markdown.'}
                   defaultValue={step1Data.longDescription}
                   inputRef={register({
                     required: true

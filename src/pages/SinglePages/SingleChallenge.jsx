@@ -1,7 +1,6 @@
 /* Main imports */ 
 import React, { Component } from 'react';
 import { Transition } from 'react-transition-group';
-import AnimatedNumber from "animated-number-react";
 import { 
   getOneChallenge, 
   updateChallenge, 
@@ -34,7 +33,7 @@ import {
 import 'react-circular-progressbar/dist/styles.css';
 import './style.css';
 
-// Animation
+/* Animation */ 
 const duration = 300;
 
 const defaultStyle = {
@@ -48,8 +47,6 @@ const transitionStyles = {
   exiting:  { opacity: 0 },
   exited:  { opacity: 0, transform: 'translateY(10px)' },
 };
-
-const formatValue = (value) => value.toFixed(0);
 
 /* Component */ 
 export default class SingleChallenge extends Component {
@@ -382,32 +379,18 @@ export default class SingleChallenge extends Component {
                     })}
                   >
                     <h1>
-                      DAY&nbsp;
-                      <AnimatedNumber
-                        duration={300}
-                        value={this.state.selectedDay}
-                        formatValue={formatValue}
-                      />
+                      DAY {this.state.selectedDay}
                     </h1>
                   </CircularProgressbarWithChildren>
                 </div>
 
                 <div className='single_checkbox-div'>
                   {this.isUserTheOwner()
-                    ? <Button className='single_checkbox-btn' style={{ backgroundColor: this.state.colors.hexColor }}><FormControlLabel
+                    && <Button className='single_checkbox-btn' style={{ backgroundColor: this.state.colors.hexColor }}><FormControlLabel
                       value="end"
                       control={<Checkbox
                         checked={this.state.challenge.completedDays.includes(this.state.selectedDay)}
                         onChange={this.handleChecked}
-                        style={{ color: 'white' }}
-                      />}
-                      label={this.state.challenge.completedDays.includes(this.state.selectedDay) ? 'Completed' : "Complete Day"}
-                      labelPlacement="end"
-                    /></Button>
-                    : <Button className='single_checkbox-btn' style={{ backgroundColor: this.state.colors.hexColor }}><FormControlLabel
-                      value="end"
-                      control={<Checkbox
-                        checked={this.state.challenge.completedDays.includes(this.state.selectedDay)}
                         style={{ color: 'white' }}
                       />}
                       label={this.state.challenge.completedDays.includes(this.state.selectedDay) ? 'Completed' : "Complete Day"}

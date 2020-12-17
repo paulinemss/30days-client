@@ -2,7 +2,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown'
-import { getOneCourse, startChallenge } from '../../services/main';
+import { 
+  getOneCourse, 
+  startChallenge, 
+  hideCourse 
+} from '../../services/main';
 import Loading from '../../components/Loading';
 import { getPrimaryColor } from '../../utils/helpers';
 
@@ -64,6 +68,18 @@ export default class SingleCourse extends Component {
     return this.state.course.author === this.props.user._id; 
   }
 
+  deleteCourse = () => {
+    console.log('delete this course', this.state.course); 
+
+    hideCourse(this.state.course.shortId, this.state.course)
+      .then(res => {
+        this.props.history.push('/courses'); 
+      })
+      .catch(err => {
+        console.log('error deleting course', err);
+      })
+  }
+
   render() {
     const { 
       title, 
@@ -123,13 +139,11 @@ export default class SingleCourse extends Component {
                   Edit Course
                   </Link>
                 </Button>
-                <Button className='course_btn'>
-                  <Link 
-                    to={`/courses/edit/${this.state.course.shortId}`}
-                    className='course_link'
-                  >
+                <Button 
+                  className='course_btn'
+                  onClick={this.deleteCourse}
+                >
                   Delete Course
-                  </Link>
                 </Button>
               </>
             }
