@@ -57,3 +57,17 @@
 .card_completed-days {
   width: 350px;
 }
+
+@media only screen and (max-width: 520px) {
+  .card {
+    margin-left: -40px;
+  }
+
+  .card_main {
+    flex-direction: column;
+  }
+
+  .card_details h2 {
+    margin-top: 20px;
+  }
+}

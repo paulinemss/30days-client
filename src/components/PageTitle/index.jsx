@@ -12,7 +12,9 @@ const PageTitle = (props) => {
           <h1>{title}</h1>
           <img src={`/${mode}.png`} alt='' />
         </div>
-        <Divider />
+        <div className='title_divider'>
+          <Divider />
+        </div>
       </div>
     </>
   )

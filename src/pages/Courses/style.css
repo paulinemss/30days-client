@@ -19,6 +19,14 @@
   margin-right: 20px !important;
 }
 
-@media screen and (max-width: 1120px) {
+@media only screen and (max-width: 520px) {
+  .courses_btns {
+    margin-left: -40px;
+    flex-direction: column;
+  }
 
+  .sort-button {
+    width: 170px;
+    justify-content: flex-start !important;
+  }
 }

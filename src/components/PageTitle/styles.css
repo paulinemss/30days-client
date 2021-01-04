@@ -27,3 +27,13 @@
     display: none;
   }
 }
+
+@media screen and (max-width: 520px) {
+  .title_details h1 {
+    font-size: 32px;
+  }
+
+  .title_divider {
+    margin-left: -40px;
+  }
+}
